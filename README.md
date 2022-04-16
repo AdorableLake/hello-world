@@ -1,8 +1,8 @@
 # hello-world
 
 Hi Guys
-AdorableLake here, my major is Industrial Design for now.
+AdorableLake here, my major was Industrial Design during my undgradeate time.
 
 Why I want to learn programming?
-Actually l I think it is a kind of cool thing.
+Actually I think it is a kind of cool thing.
 And I will keep learning.
