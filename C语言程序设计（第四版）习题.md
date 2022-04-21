@@ -121,10 +121,24 @@ int main()
 答：
 ```C
 #include<stdio.h>
-double fact(int n);
 int main()
 {
-  
+  double fact(int n);
+  int n,i,sum;
+  printf("Enter the number:\n");
+  scanf("%d",&n);
+  for(i=1;i<=n;i++)
+    sum=sum+fact(i);
+  printf("Sum of the numbers is %d\n",sum);
   return 0;
+}
+
+double fact(int n)
+{
+  int i;
+  double production=1;
+  for(i=1;i<=n;i++)
+    production=production*i;
+  return production;  
 }
 ```
