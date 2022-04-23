@@ -35,7 +35,7 @@ int main()
   // 求出北京时间的时、分
   hour1=(BJT/1000)*10+(BJT%1000)/100;
   minute1=((BJT%100)/10)*10+BJT%10;
-  
+  // 条件判断
   if(hour1<8&&hour1>0)
   {
     hour2=hour1-8;
@@ -75,8 +75,17 @@ int main()
 #include<stdio.h>
 int main()
 {
-  
+  int i,n;
+  printf("Enter the number of the students:\n");
+  scanf("%d",&n);
+  for(i=1;i<=n;i++)
+  {
+    if(i%2==1)
+    {
+      printf("%d\t",i); 
+    } 
+  }
+  printf("\n");
   return 0;
 }
 ```
-
