@@ -89,3 +89,37 @@ int main()
   return 0;
 }
 ```
+
+```C
+#include<stdio.h>
+int main()
+{
+  int i,n;
+  printf("Enter the number of the students:\n");
+  scanf("%d",&n);
+  if(n%2==1)
+  {
+    for(i=1;i<=n-1;i++)
+    {
+        if(i%2==1)
+        {
+            printf("%d\t",i); 
+        }
+    }
+    printf("%d",n);
+  }
+ 
+  else if(n%2==0)
+  {
+    for(i=1;i<=n-2;i++)
+    {
+        if(i%2==1)
+        {
+            printf("%d\t",i); 
+        }
+    }
+    printf("%d",n-1);
+  }
+  return 0;
+}
+```
