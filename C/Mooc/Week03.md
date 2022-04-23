@@ -123,3 +123,19 @@ int main()
   return 0;
 }
 ```
+
+```C
+#include<stdio.h>
+int main()
+{
+  int i,n;
+  printf("Enter the number of the students:\n");
+  scanf("%d",&n);
+  for(i=0;i<n;i=i+2)
+  {
+    printf("%d\t",i+1); 
+  }
+  printf("\n");
+  return 0;
+}
+```
