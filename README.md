@@ -10,8 +10,10 @@ Actually I think it is a kind of cool thing.
 
 And I will keep learning.
 
-## C language practise(2022.04-)
+## C Practise(2022.04-)
 
-[Mooc](https://github.com/AdorableLake/hello-world/tree/master/Mooc)
+[Mooc](https://github.com/AdorableLake/hello-world/tree/master/C/Mooc)
 
-[Book](https://github.com/AdorableLake/hello-world/tree/master/Book)
+[Book](https://github.com/AdorableLake/hello-world/tree/master/C/Book)
+
+## Python Practice(2020.01-)
