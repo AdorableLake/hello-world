@@ -109,7 +109,7 @@ int main()
     printf("%d",n);
   }
  
-  else if(n%2==0)
+  else
   {
     for(i=1;i<=n-2;i++)
     {
