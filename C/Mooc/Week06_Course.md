@@ -6,13 +6,13 @@
 #include<stdio.h>
 int main()
 {
-	int x;
-	double sum=0;
-	int cnt=0;
-	scanf("%d",&x);
-	while(x!=-1)
-	{
-		sum=sum+x;
+  int x;
+  double sum=0;
+  int cnt=0;
+  scanf("%d",&x);
+  while(x!=-1)
+  {
+	 	sum=sum+x;
 		cnt++;
 		scanf("%d",&x);
 	}
