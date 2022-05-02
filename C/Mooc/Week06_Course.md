@@ -265,3 +265,28 @@ int main()
 }
 ```
 ### 求和
+求出1～10、20～30、35～45的三个和
+```C
+// `Command+C` `Command+V`->代码复制->不良代码
+// 所以我们写自己的函数
+#include<stdio.h>
+
+void sum(int begin, int end)
+{
+  int i;
+  int sum=0;
+  for(i=begin;i<=end;i++)
+  {
+    sum+=i;
+  }
+  printf("%d到%d的和是%d\n",begin,end,sum);
+}
+
+int main()
+{
+  sum(1,10);
+  sum(20;30);
+  sum(35,45);
+  return 0;
+}
+```
