@@ -249,3 +249,47 @@ int main()
   return0;
 }
 ```
+### 求最大公约数
+利用辗转相除法以及利用枚举法
+```C
+// 枚举法思路
+// 1. 设t为2；
+// 2. 如果u和v都能被t整除，则记下这个t；
+// 3. t+1后重复2，直到 t==u || t==v;
+// 4. 曾经记下的最大的可以同时整除u和v的t就是gcd(Short from GreatCommonDivisor).
+#include<stdio.h>
+int main()
+{
+  int a,b;
+  int min;
+  
+  scanf("%d %d",&a,&b);
+  if(a<b)
+  {
+    min=a;
+  }
+  else
+  {
+    min=b;
+  }
+  int ret=0;
+  int i;
+  for(i=1;i<min;i++)
+  {
+    if(a%i==0)
+    {
+      if(b%i==0)
+      {
+        ret=i;
+      }
+    }
+  }
+  printf("%d和%d的最大公约数是%d。\n",a,b,ret);
+  return 0;
+}
+```
+```C
+//  辗转相除法
+// 1.
+// 2.
+// 3.
