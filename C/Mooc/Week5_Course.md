@@ -1,0 +1,176 @@
+# 第五周 循环控制
+
+```C
+#include<stdio.h>
+int main()
+{
+  int x;
+  scanf("%d",&x);
+  for(x=2;x<=100;x++)
+  {
+    int i;
+    int isPrime=1;
+    for(i=2;i<x;i++)
+    {
+      if(x%1==0)
+      {
+        isPrime==0;
+        break;
+      }
+    }
+    if(isPrime==1)
+    {
+      printf("是素数\n");
+    }
+    else
+    {
+      printf("不是素数\n");
+    }
+  }
+  return 0;
+}
+```
+## 2. 多重循环
+### 如何写一个程序输出100以内的素数？
+```C
+#include<stdio.h>
+int main()
+{
+  int x;
+  scanf("%d",&x);
+  for(x=2;x<100;x++)
+  {
+    int i;
+    int isPrime=1; // x是素数
+    for(i=2;i<x;i++)
+    {
+      if(x%1==0)
+      {
+        isPrime==0;
+        break;
+      }
+    }
+    if(isPrime==1)
+    {
+      printf("%d ",x);
+    }
+  }
+  printf("\n");
+  return 0;
+}
+```
+### 输出前五十个素数的程序
+```C
+#include<stdio.h>
+int main()
+{
+  int x;
+  scanf("%d",&x);
+  // for(x=2;x<100;x++)
+  // while(cnt<50)
+  for(x=2;cnt<50;x++)
+  {
+    int i;
+    int isPrime=1; // x是素数
+    for(i=2;i<x;i++)
+    {
+      if(x%1==0)
+      {
+        isPrime==0;
+        break;
+      }
+    }
+    if(isPrime==1)
+    {
+      printf("%d ",x);
+      cnt++;
+    }
+    // x++;
+  }
+  printf("\n");
+  return 0;
+}
+```
+### 如何用1角、2角、5角的硬币凑出10元以下的金额？
+```C
+#include<stdio.h>
+int main()
+{
+  int x;
+  int one,two,five;
+  scanf("%d",&x);
+  for(one=1;one<x*10;one++)
+  {
+    for(two=1;two<x*10/2;two++)
+    {
+      for(five=1;five<x*10/5;five++)
+      {
+        if(one+two*2+five*5==x*10)
+        {
+          printf("可以用%d个1角加%d个2角加%d个5角得到%d元\n",one,two five,x);
+        }
+      }
+    }
+  }
+  return 0;
+}
+```
+### 如何在以上程序基础上找出一种即可？
+```C
+#include<stdio.h>
+int main()
+{
+  int x;
+  int one,two,five;
+  scanf("%d",&x);
+  int exit=1; // 利用新定义一个变量;
+  for(one=1;one<x*10;one++)
+  {
+    for(two=1;two<x*10/2;two++)
+    {
+      for(five=1;five<x*10/5;five++)
+      {
+        if(one+two*2+five*5==x*10)
+        {
+          printf("可以用%d个1角加%d个2角加%d个5角得到%d元\n",one,two five,x);
+          exit=1;
+          break;
+        }
+      }
+      if(exit) // if()语句后面默认变量为`1`;
+        break;
+    }
+    if(exit)
+      break;
+  }
+  return 0;
+}
+```
+```C
+#include<stdio.h>
+int main()
+{
+  int x;
+  int one,two,five;
+  scanf("%d",&x);
+  for(one=1;one<x*10;one++)
+  {
+    for(two=1;two<x*10/2;two++)
+    {
+      for(five=1;five<x*10/5;five++)
+      {
+        if(one+two*2+five*5==x*10)
+        {
+          printf("可以用%d个1角加%d个2角加%d个5角得到%d元\n",one,two five,x);
+          goto out; // 不推荐使用`goto`语句，因为有很多原因：D
+        }
+      }
+    }
+  }
+out:  
+  return 0;
+}
+```
+
+## 3. 循环应用
+### 求和
