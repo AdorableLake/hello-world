@@ -289,7 +289,105 @@ int main()
 }
 ```
 ```C
-//  辗转相除法
-// 1.
-// 2.
-// 3.
+//  辗转相除法思路
+// 1. 如果b=0，计算结束，a就是最大公约数；
+// 2. 否则，计算a%b，a=b，b=a%b；
+// 3.回到第一步。
+#include<stdio.h>
+int main()
+{
+  int a,b;
+  int t;
+  scanf("%d %d",&a,&b);
+  while(b!=0)
+  {
+    t=a%b;
+    a=b;
+    b=t;
+    printf("a=%d,b=%d,t=%d\n",a,b,t);
+  }
+  printf("gcd=%d\n",a);
+  return 0;
+}
+```
+### 正序分解整数
+```C
+#include<stdio.h>
+int main()
+{
+  int x;
+  scanf("%d",&x);
+   
+  /*
+  x=12345;
+  int cnt=0;
+  for(x>0;x=x/10;cnt++)
+  do{
+     x=x/10;
+     mask=mask*10;
+  }while(x>9);
+  */
+   
+  int mask=1;
+  int t=x;
+  while(t>9)
+  {
+    t=t/10;
+    mask=mask*10;
+  }
+  printf("x=%d, mask=%d\n",x,mask);
+   
+  /*
+  int t=0;
+  do{
+     int d=x%10;
+     t=t*10+d;
+     x=x/10;
+  }while(x>0);
+  printf("x=%d,t=%d\n",x,t);
+  */
+   
+  do{
+     int d=x%10;
+     printf("%d",d);
+     if(x>9) // 输出最后一位时去掉空格的判断语句
+     {
+       printf(" ");
+     }
+     x=x/10;
+  }while(x>0);
+  printf("\n");
+   
+  return 0;
+}
+```
+```C
+#include<stdio.h>
+int main()
+{
+  int x;
+  scanf("%d",&x);
+	
+  int mask=1;
+  int t=x;
+  while(t>9)
+  {
+    t=t/10;
+    mask=mask*10;
+  }
+  printf("x=%d, mask=%d\n",x,mask);
+   
+  do{
+     int d=x%10;
+     printf("%d",d);
+     if(x>9) // 输出最后一位时去掉空格的判断语句
+     {
+       printf(" ");
+     }
+     x=x/10;
+  }while(x>0);
+  printf("\n");
+   
+  return 0;
+}
+```
