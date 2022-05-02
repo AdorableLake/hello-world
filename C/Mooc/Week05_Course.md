@@ -1,5 +1,6 @@
 # 第五周 循环控制
-
+## 1. 循环控制
+### 如何写一个程序判断读入的数是否是素数？
 ```C
 #include<stdio.h>
 int main()
@@ -12,7 +13,38 @@ int main()
     int isPrime=1;
     for(i=2;i<x;i++)
     {
-      if(x%1==0)
+      if(x%i==0)
+      {
+        isPrime==0;
+        break;
+      }
+    }
+    if(isPrime==1)
+    {
+      printf("是素数\n");
+    }
+    else
+    {
+      printf("不是素数\n");
+    }
+  }
+  return 0;
+}
+```
+### 如何输出100以内的素数？
+```C
+#include<stdio.h>
+int main()
+{
+  int x;
+  scanf("%d",&x);
+  for(x=2;x<=100;x++)
+  {
+    int i;
+    int isPrime=1;
+    for(i=2;i<x;i++)
+    {
+      if(x%i==0)
       {
         isPrime==0;
         break;
@@ -174,3 +206,46 @@ out:
 
 ## 3. 循环应用
 ### 求和
+```
+f(n)=1+1/2+1/3+···+1/n
+```
+```C
+#include<stdio.h>
+int main()
+{
+  int n;
+  int i;
+  double sum=0.0;
+  
+  scanf("%d",&n);
+  for(i=1;i<=n;i++)
+  {
+    sum=sum+1.0/i;
+  }
+  printf("f(%d)=%f\n",n,sum);
+  return0;
+}
+```
+```
+f(n)=1-1/2+1/3-1/4+...+1/n
+```
+```C
+#include<stdio.h>
+int main()
+{
+  int n;
+  int i;
+  double sum=0.0;
+  // int sign=1;
+  double sign=1.0;
+  
+  scanf("%d",&n);
+  for(i=1;i<=n;i++)
+  {
+    sum=sum+sign/i;
+    sign=-sign;
+  }
+  printf("f(%d)=%f\n",n,sum);
+  return0;
+}
+```
