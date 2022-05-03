@@ -290,3 +290,19 @@ int main()
   return 0;
 }
 ```
+### 函数定义
+以下面的代码为例
+```C
+void sum(int begin, int end)
+// 第一行为函数头，`void`为返回类型，`sum`为函数名，`int begin, int end`为参数表
+{
+  int i;
+  int sum=0;
+  for(i=begin;i<=end;i++)
+  {
+    sum+=i;
+  }
+  printf("%d到%d的和是%d\n",begin,end,sum);
+}
+// `{}`内部为函数体
+```
