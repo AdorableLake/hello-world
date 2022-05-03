@@ -306,3 +306,120 @@ void sum(int begin, int end)
 }
 // `{}`内部为函数体
 ```
+### 从函数中返回值
+```C
+int max(int a, int b)
+{
+  int ret;
+  if(a>b)
+  {
+    ret=a;
+  }
+  else
+  {
+    ret=b;
+  }
+  return ret;
+}
+// “单一出口理念”
+```
+
+```C
+int max(int a, int b)
+{
+  if(a>b)
+  {
+    return a;
+  }
+  else
+  {
+    return b;
+  }
+}
+// 不符合“单一出口”理念
+```
+### 没有返回值的函数
+```
+viod 函数名（参数表）
+```
+## 3. 函数的参数和变量
+### 函数先后关系
+```C
+#include<stdio.h>
+void sum(int begin, int end);
+// 函数原型
+int main()
+{
+  sum(1,10);
+  sum(20;30);
+  sum(35,45);
+  return 0;
+}
+
+void sum(int begin, int end)
+// 真正的函数头
+{
+  int i;
+  int sum=0;
+  for(i=begin;i<=end;i++)
+  {
+    sum+=i;
+  }
+  printf("%d到%d的和是%d\n",begin,end,sum);
+}
+```
+```C
+#include<stdio.h>
+int main()
+{
+  void sum(int begin, int end);
+  // 旧版本的函数原型，现阶段不使用
+  sum(1,10);
+  sum(20;30);
+  sum(35,45);
+  return 0;
+}
+
+void sum(int begin, int end)
+// 真正的函数头
+{
+  int i;
+  int sum=0;
+  for(i=begin;i<=end;i++)
+  {
+    sum+=i;
+  }
+  printf("%d到%d的和是%d\n",begin,end,sum);
+}
+```
+### 参数传递
+调用函数给的值与参数的类型不匹配是C语言的传统上最大的漏洞，因此需要自己对于编程上的参数进行匹配。
+#### 传值
+1. 每个函数有自己的变量空间，参数也位于着独立的空间中，和其他函数没有关系；
+2. 过去，对于函数参数表中的参数，叫做“形式参数”，调用函数时给的值叫做“实际参数“；
+```C
+#include<stdio.h>
+void swap(int a, int b); // 形参（Formal Actor）->参数
+
+int main()
+{
+  int a=5;
+  int b=6;
+  
+  swap(a,b); // 实参（Real Actor）->值
+  
+  return 0;
+}
+
+void swap(int a, int b) // 形参（Formal Actor）->参数
+// 真正的函数头
+{
+  int t=a;
+  a=b;
+  b=t;
+}
+// 不建议使用这种“古老的语言去形容这些变量”
+// 我们认为是“参数”和“值”
+```
+### 本地变量
+定义在函数内部的变量就是本地变量。
