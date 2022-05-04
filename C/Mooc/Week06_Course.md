@@ -1,23 +1,23 @@
 # 第六周 数组与函数
 
 ## 目录/Catalog
-## [1. 数组](https://github.com/AdorableLake/hello-world/edit/master/C/Mooc/Week06_Course.md#1-数组)
+## [1. 数组](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week06_Course.md#1-数组-1)
 ### 1.1 如何写一个程序计算用户输入的数字的平均数？
 ### 1.2 如何写一个程序计算用户输入的数字的平均数，并输出所有大于平均数的数？
 ### 1.3 定义数组
 ### 1.4 写一个程序，输入数量不确定的[0,9]范围内的整数，统计每一种数字出现的次数，输入-1表示结束。
-## [2. 函数的定义与使用](https://github.com/AdorableLake/hello-world/edit/master/C/Mooc/Week06_Course.md#2-函数的定义与使用)
+## [2. 函数的定义与使用](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week06_Course.md#2-函数的定义与使用)
 ### 2.1 求素数和
 ### 2.2 求和：求出1～10、20～30、35～45的三个和
 ### 2.3 函数定义
 ### 2.4 从函数中返回值
 ### 2.5 没有返回值的函数
-## [3. 函数的参数和变量](https://github.com/AdorableLake/hello-world/edit/master/C/Mooc/Week06_Course.md#3-函数的参数和变量-1)
+## [3. 函数的参数和变量](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week06_Course.md#3-函数的参数和变量-1)
 ### 3.1
 ### 3.2
 ### 3.3
 ### 3.4
-## [4. 二维数组](url)
+## [4. 二维数组](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week06_Course.md#4-二维数组-1)
 ### 4.1 二维数组
 ### 4.2 
 
