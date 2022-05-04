@@ -522,4 +522,123 @@ return (i);
 ## 4. 二维数组
 ### 4.1 二维数组
 #### 4.1.1 定义
+
 #### 4.1.2 二维数组的遍历
+
+#### 4.1.3 二维数组的初始化
+1. 列数必须给出的，行数可以由编译器来数；
+2. 每行一个`{},`逗号分隔每个元素；
+3. 最后的逗号的存在有古老的传统；
+4. 如果省略，可以补零；
+5. 也可以使用定位（仅在C99中使用）；
+```C
+#include<stdio.h>
+int main()
+{
+  const int size = 3;
+  int board[size][size];
+  int i,j;
+  int numOfX;
+  int numOfO;
+  int result = -1; // -1: 平局； 1: X赢； O:O赢
+  
+  // 读入矩阵
+  for( i=0; i<size; i++ )
+  {
+    for( j=0; j<size; j++ )
+    {
+      scanf("%d",&board[i][j]);
+    }
+  }
+  // 检查行
+  for( i=0; i<size && result == -1; i++ )
+  {
+    numOfO == numOfX = 0;
+    for( j=0; j<size; j++ )
+    {
+      if( board[i][j] == 1 )
+      {
+        numOfX ++;
+      }
+      else
+      {
+        numOfO ++;
+      }
+    }
+    if( numOfO == size )
+    {
+      result = 0;
+    }
+    else if( numOfX == size )
+    {
+      result = 1;
+    }
+  }
+  
+  // 检查列
+  if( result == -1)
+  {
+    for( j=0; j<size && result == -1; j++ )
+    {
+      numOfO == numOfX = 0;
+      for( i=0; i<size; i++ )
+      {
+        if( board[i][j] == 1 )
+        {
+          numOfX ++;
+        }
+        else
+        {
+          numOfO ++;
+        }
+      }
+      if( numOfO == size )
+      {
+        result = 0;
+      }
+      else if( numOfX == size )
+      {
+        result = 1;
+      }
+    }
+  }
+  // 可以发现 检查行列的代码几乎一致，如何合并？
+  
+  // 检查对角线
+  // 检查正对角线
+  numOfO = numOfX = 0;
+  for( i=0; i<size; i++ )
+  {
+    if( board[i][i] == 1 )
+    {
+      numOfX ++;
+    }
+    else
+    {
+      numOfO ++;
+    }
+  }
+  if( numOfO == size )
+  {
+    result =0;
+  }
+  else if( numOfX == size )
+  {
+    result = 1;
+  }
+  // 检查斜对角线
+  numOfO = numOfX = 0;
+  for( i=0; i<size; i++ )
+  {
+    if( board[i][size-1] == 1 )
+    {
+      numOfX ++;
+    }
+    else
+    {
+      numOfO ++;
+    }
+  }
+  return 0;
+}
+```
