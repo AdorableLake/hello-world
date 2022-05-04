@@ -522,15 +522,29 @@ return (i);
 ## 4. 二维数组
 ### 4.1 二维数组
 #### 4.1.1 定义
+`int a[3][5]`通常代表一个3行5列的矩阵；
 
 #### 4.1.2 二维数组的遍历
-
+```
+for( i=0; i<3; i++ )
+{
+  for ( j=0; j<5; j++ )
+  {
+    a[i][j] = i*j;
+  }
+}
+```
+请注意`a[i,j]=a[j]`
 #### 4.1.3 二维数组的初始化
 1. 列数必须给出的，行数可以由编译器来数；
 2. 每行一个`{},`逗号分隔每个元素；
 3. 最后的逗号的存在有古老的传统；
 4. 如果省略，可以补零；
 5. 也可以使用定位（仅在C99中使用）；
+
+#### 4.1.4 Tic-Tac-Toe
+1. 读入一个3X3的矩阵，矩阵中的数字为1表示该位置上有一个X，为0表示为O；
+2. 有程序判断这个矩阵中是否有获胜的一方，输出表示获胜一方的字符X或O，或输出无人获胜。
 ```C
 #include<stdio.h>
 int main()
@@ -554,7 +568,7 @@ int main()
   for( i=0; i<size && result == -1; i++ )
   {
     numOfO == numOfX = 0;
-    for( j=0; j<size; j++ )
+    for( j=0; j<size; j++ ) // 
     {
       if( board[i][j] == 1 )
       {
@@ -604,6 +618,98 @@ int main()
   }
   // 可以发现 检查行列的代码几乎一致，如何合并？
   
+  // 检查对角线
+  // 检查正对角线
+  numOfO = numOfX = 0;
+  for( i=0; i<size; i++ )
+  {
+    if( board[i][i] == 1 )
+    {
+      numOfX ++;
+    }
+    else
+    {
+      numOfO ++;
+    }
+  }
+  if( numOfO == size )
+  {
+    result =0;
+  }
+  else if( numOfX == size )
+  {
+    result = 1;
+  }
+  // 检查斜对角线
+  numOfO = numOfX = 0;
+  for( i=0; i<size; i++ )
+  {
+    if( board[i][size-1] == 1 )
+    {
+      numOfX ++;
+    }
+    else
+    {
+      numOfO ++;
+    }
+  }
+  return 0;
+}
+```
+
+```C
+//Update
+#include<stdio.h>
+int main()
+{
+  const int size = 3;
+  int board[size][size];
+  int i,j;
+  int numOfX;
+  int numOfO;
+  int result = -1; // -1: 平局； 1: X赢； O:O赢
+  
+  // 读入矩阵
+  for( i=0; i<size; i++ )
+  {
+    for( j=0; j<size; j++ )
+    {
+      scanf("%d",&board[i][j]);
+    }
+  }
+  // 检查行、列
+  for( i=0; i<size && result == -1; i++ )
+  {
+    numOfO == numOfX = 0;
+    for( j=0; j<size; j++ )
+    {
+      if( board[i][j] == 1 )
+      {
+        numOfX ++;
+      }
+      else
+      {
+        numOfO ++;
+      }
+      if( board[j][i] == 1 )
+      {
+        numOfX ++;
+      }
+      else
+      {
+        numOfO ++;
+      }
+    }
+    if( numOfO == size )
+    {
+      result = 0;
+    }
+    else if( numOfX == size )
+    {
+      result = 1;
+    }
+  }
+
   // 检查对角线
   // 检查正对角线
   numOfO = numOfX = 0;
