@@ -304,16 +304,50 @@ int search(int key, int a[], int len)
   }
   return ret;
 }
+
 int main()
 {
-  int k = 10;
-  int r = search(k, amount, sizeof(amount)/sizeof(amount[0]));
-  if( r > -1 )
-  {
-    printf("%s\n",name[r]);
-  }
+  int a[] = {1,3,2,5,12,14,23,6,9,45};
+  int r = search(12, a, sizeof(a)/sizeof(a[0]));
+  printf("%d\n",r);
   
   return 0;
 }
 ```
 ## 3. 排序初步
+```C
+#include<stdio.h>
+int max(int a[], int len)
+{
+  int maxid = 0;
+  for( int i=1; i<len; i++ )
+  {
+    if( a[i] > a[maxid])
+    {
+      maxid = i;
+    }
+  }
+  return maxid;
+}
+int main()
+{
+  int a[] = {2,45,6,12,87,34,90,24,23,11,65};
+  int len = sizeof(a)/sizeof(a[0]);
+  
+  // 选择排序法
+  for( int i=len-1; i>0; i-- )
+  {
+    int maxid = max(a, i+1);
+    //swap a[maxid], a[len-1]
+    int t = a[maxid];
+    a[maxid] = a[i];
+    a[i] = t;
+  }
+  
+  for( int i=0; i<len; i++ )
+  {
+    printf("%d ",a[i]);
+  }
+  return 0;
+}
+```
