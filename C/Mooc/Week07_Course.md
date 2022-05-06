@@ -115,7 +115,115 @@ int isPrime(int x, int knownPrimes[], int numberOfKnownPrimes)
 }
 ```
 #### 1.2.3 构造素数表
-欲构造n以内的素数表
+欲构造n以内的素数表（算法）
 1. 令x为2；
-2. 将2x、3x、4x直至ax<n的数标记为非素数
-3. 令x为
+2. 将2x、3x、4x直至ax<n的数标记为非素数；
+3. 令x为下一个没有被标记为非素数的数，重复2；
+4. 直到所有的数都已经尝试完毕；
+
+
+构造n以内的素数表（伪代码）
+1. 开辟`prime[n]`，初始化其所有的元素为1，`prime[x]`为1表示x是素数；
+2. 令x=2；
+3. 如果x是素数，则对于`(i=2;x*i<n;i++)`令`prime[i*x]=0`；
+4. 令`x++`，如果`x<n`重复3，否则结束；
+
+
+构造n以内的素数表（代码）
+```C
+#include<stdio.h>
+int main()
+{
+  const int maxNumber = 25;
+  int isPrime[maxNumber];
+  int i;
+  int x;
+  for( i=0; i<maxnumber; i++ )
+  {
+    isPrime[i] = 1;
+  }
+  for( x=2; x<maxNumber; x++ )
+  {
+    if( isPrime[x] )
+    {
+      for( i=2; i*x<maxNumber; i++ )
+      {
+        isPrime[i*x] = 0;
+      }
+    }
+  }
+  for( i=2; i<maxNumber; i++ )
+  {
+    if( isPrime[i])
+    {
+      printf("%d\t",i);
+    }
+  }
+  printf("\n");
+  
+  return 0;
+}
+// 算法不一定和人的思考方式相同
+```
+## 2. 搜索
+### 2.1 线性搜索
+最简单的方式：遍历
+```C
+#include<stdio.h>
+
+int search(int key, int a[], int len)
+{
+  int ret = -1;
+  for( int i=0; i<len; i++ )
+  {
+    if( key == a[i])
+    {
+      ret = i; // "single output"
+      break;
+    }
+  }
+  return ret;
+}
+
+int main()
+{
+  int a[] = {1,3,2,5,12,14,23,6,9,45};
+  int r = search(12, a, sizeof(a)/sizeof(a[0]));
+  printf("%d\n",r);
+  
+  return 0;
+}
+```
+### 2.2 搜索的例子
+```C
+#include<stdio.h>
+
+int amount[] = {1,5,10,25,50};
+char *name[] = {"penny","nickel","dime","quarter","half-dollar"};
+
+int search(int key, int a[], int len)
+{
+  int ret = -1;
+  for( int i=0; i<len; i++ )
+  {
+    if( key == a[i])
+    {
+      ret = i; // "single output"
+      break;
+    }
+  }
+  return ret;
+}
+
+int main()
+{
+  int k = 10;
+  int r = search(k, amount, sizeof(amount)/sizeof(amount[0]));
+  if( r > -1 )
+  {
+    printf("%s\n",name[r]);
+  }
+  
+  return 0;
+}
+```
