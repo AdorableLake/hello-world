@@ -25,12 +25,14 @@ int main(void)
     }
     printf("\n");
   }
+  int b[]=a; ->❌
+  若想复制到另一个数组中，只能使用遍历
   */
   int x;
   int loc;
   printf("请输入一个数字：");
   scanf("%d",&x);
-  loc=search(x,a,sizeof(a)/sizeof(a[0]));// `sizeof`永远是真正确的
+  loc=search(x,a,sizeof(a)/sizeof(a[0]));// `sizeof`永远是正确的
   if( loc != -1)
   {
     printf("%d在第%d个位置上\n",x,loc);
