@@ -317,6 +317,7 @@ int main()
 ## 3. 排序初步
 ```C
 #include<stdio.h>
+
 int max(int a[], int len)
 {
   int maxid = 0;
@@ -329,6 +330,7 @@ int max(int a[], int len)
   }
   return maxid;
 }
+
 int main()
 {
   int a[] = {2,45,6,12,87,34,90,24,23,11,65};
@@ -348,6 +350,7 @@ int main()
   {
     printf("%d ",a[i]);
   }
+  
   return 0;
 }
 ```
