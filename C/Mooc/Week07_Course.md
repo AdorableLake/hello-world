@@ -16,10 +16,12 @@ int search(int key, int a[], int length);
 int main(void)
 {
   int a[] = {2,4,6,7,1,3,5,9,11,23,14,32}; // 数组的集成初始化
+  // 数组作为函数的参数是，不能在`[]`给出数组的大小
+  // 同时，也不能再利用`sizeof`来计算数组大小
   /* use for testing
   {
     int i;
-    for ( i=0; i<13; i++ )
+    for ( i=0; i<13; i++ )// 常见错误：循环条件<=数组长度
     {
       printf("%d\t",a[i]);
     }
@@ -49,7 +51,7 @@ int search(int key, int a[], int length)
 {
   int ret = -1;
   int i;
-  for( i=0; i<length; i++ )
+  for( i=0; i<length; i++ ) 
   {
     if( a[i] == key )
     {
@@ -60,4 +62,60 @@ int search(int key, int a[], int length)
   return ret;
 }
 ```
-### 1.2 数组的大小
+### 1.2 数组例子
+#### 1.2.1 判断素数
+```C
+
+```
+#### 1.2.2 判断是否能被已知的且<x的素数整除
+```C
+#include<stdio.h>
+int main(void)
+{
+  const int number = 100;
+  int prime[number] = [2];
+  int count = 1;
+  int i = 3;
+  while( count < number )
+  {
+    if ( isPrime(i, prime, count))
+    {
+      prime[count++] = i; // 先赋值再将count变量+1
+    }
+    i++;
+  }
+  for( i=0; i<number; i++ )
+  {
+    printf("%d",prime[i]);
+    if( (i+5)%5 )
+    {
+      printf("\t");
+    }
+    else
+    {
+      printf("\n");
+    }
+  }
+  return 0;
+}
+
+int isPrime(int x, int knownPrimes[], int numberOfKnownPrimes)
+{
+  int ret = 1;
+  int i;
+  for( i=0; i<numberOfKnownPrimes; i++ )
+  {
+    if（ x % knownPrimes[i] == 0）
+    {
+      ret =0;
+      break;
+    }
+  }
+  return ret;
+}
+```
+#### 1.2.3 构造素数表
+欲构造n以内的素数表
+1. 令x为2；
+2. 将2x、3x、4x直至ax<n的数标记为非素数
+3. 令x为
