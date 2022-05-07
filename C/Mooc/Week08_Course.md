@@ -46,3 +46,27 @@ int main(void)
 }
 // 32-bit & 64-bit 会有区别
 ```
+3. `&`不能取的地址
+`&`不能对没有地址的东西取地址
+
+`&(a+b)`->?
+
+`&(a++)`->?
+
+`&(++a)`->?
+
+```C
+#include<stdio.h>
+
+int main(void)
+{
+  int a[10];
+ 
+  printf("%p\n", &a); 
+  printf("%p\n", a);
+  printf("%p\n",&a[0]); //取a[0]的地址
+  printf("%p\n",&a[1]); //取a[1]的地址
+  
+  return 0;
+}
+```
