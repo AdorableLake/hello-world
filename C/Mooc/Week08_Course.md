@@ -70,3 +70,42 @@ int main(void)
   return 0;
 }
 ```
+### 1.2 指针
+#### 指针
+```
+int i;
+int* p = &i;
+int* p,q;
+int *p,q;✅->`*p`为指针
+```
+#### 指针变量
+1. 变量的值是内存的地址；
+2. 普通变量的值是实际的值；
+3. 指针变量的值是具有实际值的变量的地址；
+
+
+#### 作为参数的指针
+1. `void f(int*p)`;
+2. 在被调用的时候得到了某个变量的地址：`int i=0; f(&i)`，在函数里可以通过该指针访问外面的`i`;
+
+例子🌰
+```C
+#include<stdio.h>
+
+void f(int *p);
+
+int main(void)
+{
+  int i =6;
+  printf("&i=%p\n",&i);
+  f(&i);
+  
+  return 0;
+}
+
+void f(int *p)
+{
+  printf(" p=%p\n",p);
+}
+```
+#### 访问那个地址上的变量
