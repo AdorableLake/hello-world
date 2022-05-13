@@ -109,3 +109,127 @@ void f(int *p)
 }
 ```
 #### 访问那个地址上的变量
+`*`是一个单目运算符，用来访问指针的值所表示的低智商的变量
+
+既可以表示左值也可以表示右值
+```
+int k = *p;->
+*p = k+1;-> 
+```
+例子🌰
+```C
+#include<stdio.h>
+
+void f(int *p);
+void g(int k);
+
+int main(void)
+{
+  int i =6;
+  printf("&i=%p\n",&i);//指的是i代表的地址
+  f(&i);
+  g(i);
+  
+  return 0;
+}
+
+void f(int *p)
+{
+  printf(" p=%p\n",p);
+  printf("*p=%d\n",*p);
+  *p = 26;//函数代表的是值的传递
+}
+
+void g(int k)
+{
+  printf("k=%d\n",k);
+}
+```
+### 1.3 指针与数组
+#### 1.3.1 传入函数的数组成了什么？
+```
+int isPrime(int x, int knownPrimes[], int numberOfKnownPrimes)
+{
+  int ret = 1;
+  int i;
+  for( i=0; i<numberOfKnownPrimes; i++ )
+  {
+    if( x % knownPrimes[i] == 0 )
+    {
+      ret = 0;
+      break;
+    }
+  }
+  return ret;
+}
+```
+Explore
+```C
+#include<stdio.h>
+
+void minmax(int a[], int len, int *max, int *min);
+
+int main(void)
+{
+  int a[] = {1,2,3,4,5,6,7,8,9,12,13,14,16,17,21,23,55,};
+  int min,max;
+  printf("main sizeof(a)=%lu\n",sizeof(a));
+  minmax(a, sizeof(a)/sizeof(a[0]),&min,&max);
+  printf("min=%d,max=%d\n",min, max);
+  
+  return 0;
+}
+
+void minmax(int a[], int len, int *max, int *min)
+{
+  int i;
+  printf("minmax sizeof(a)=%lu\n",sizeof(a));
+  *min = *max = a[0];
+  for( i=1; i<len; i++ )
+  {
+    if( a[i] < *min )
+    {
+      *min = a[i];
+    }
+    else if( a[i] > *max )
+    {
+      *max = a[i];
+    }
+  }
+}
+```
+
+```C
+#include<stdio.h>
+
+void minmax(int a[], int len, int *max, int *min);
+
+int main(void)
+{
+  int a[] = {1,2,3,4,5,6,7,8,9,12,13,14,16,17,21,23,55,};
+  int min,max;
+  printf("main sizeof(a)=%lu\n",sizeof(a));//
+  minmax(a, sizeof(a)/sizeof(a[0]),&min,&max);
+  printf("min=%d,max=%d\n",min, max);
+  
+  return 0;
+}
+
+void minmax(int a[], int len, int *max, int *min)
+{
+  int i;
+  printf("minmax sizeof(a)=%lu\n",sizeof(a));
+  *min = *max = a[0];
+  for( i=1; i<len; i++ )
+  {
+    if( a[i] < *min )
+    {
+      *min = a[i];
+    }
+    else if( a[i] > *max )
+    {
+      *max = a[i];
+    }
+  }
+}
+```
