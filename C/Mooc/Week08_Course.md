@@ -163,7 +163,7 @@ int isPrime(int x, int knownPrimes[], int numberOfKnownPrimes)
   return ret;
 }
 ```
-#### Explore
+#### 1.3.2 Explore
 <details>
 <summary>点击这里打开/关闭隐藏内容😯</summary>
 <p>
@@ -281,24 +281,80 @@ void minmax(int *a, int len, int *max, int *min)
 ```
 </details>
   
-```
-int isPrime(int x, int knownPrimes[], int numberOfKnownPrimes)
+#### 1.3.3 小结
+1. 因此函数参数表中的数组其实是指针；
+                                   
+2. `sizeof(a) == sizeof(int*)`；
+
+3. 尽管如此，可以用数组的运算符`[]`进行运算；
+
+#### 1.3.4 数组参数
+下列四种函数原型是等价的
+  1. `int sum(int *ar, int n);`
+  2. `int sum(int *, int);`
+  3. `int sum(int ar[], int n);`
+  4. `int sum(int [], int);`
+  
+#### 1.3.5 数组变量是特殊的指针，
+  1. 数组变量本身表达地址，所以：
+  
+    1.1 `int a[10]; int *p=a;` // 无须使用`&` 取地址；
+  
+    1.2 但是数组的单元表达的是变量，需要用`&`取地址；
+  
+    1.3 `a == &a[0]`
+  
+  2. `[]`运算符可以对数组做，也可以对指针做：
+  
+    2.1 `p[0] <==> a[0]`
+  
+  3. `*`运算符既可以对指针做，也可以对数组做；
+  
+    3.1 例如`*a=25`；
+  
+  4. 数组变量其实是`const`(常量)的指针，因此不能被赋值；
+  
+    4.1 `int a[] <==> int * const a=`
+  
+```C
+#include<stdio.h>
+
+void minmax(int *a, int len, int *max, int *min);
+
+int main(void)
 {
-  int ret = 1;
+  int a[] = {1,2,3,4,5,6,7,8,9,12,13,14,16,17,21,23,55,};
+  int min,max;
+  printf("main sizeof(a)=%lu\n",sizeof(a));//
+  
+  printf("main a=%p\n",a); // 查看a的地址
+  
+  minmax(a, sizeof(a)/sizeof(a[0]),&min,&max);
+  printf("min=%d,max=%d\n",min, max);
+  
+  int *p = &min;
+  printf("*p=%d\n",*p);
+  printf("p[0]=%d\n",p[0]); 
+  // p[0] 指 p 这个数组的第一个单元，这是一个指针变量，因此可如此书写
+  
+  return 0;
+}
+
+void minmax(int *a, int len, int *max, int *min)
+{
   int i;
-  for( i=0; i<numberOfKnownPrimes; i++ )
+  printf("minmax sizeof(a)=%lu\n",sizeof(a));
+  *min = *max = a[0];
+  for( i=1; i<len; i++ )
   {
-    if( x % knownPrimes[i] == 0 )
+    if( a[i] < *min )
     {
-      ret = 0;
-      break;
+      *min = a[i];
+    }
+    else if( a[i] > *max )
+    {
+      *max = a[i];
     }
   }
-  return ret;
 }
 ```
-1. 因此函数参数表中的数组其实是指针
-                                   
-2. `sizeof(a) == sizeof(int*)`
-
-3. 尽管如此，可以用数组的运算符`[]`进行运算                     
