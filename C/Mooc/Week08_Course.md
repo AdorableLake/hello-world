@@ -1,11 +1,15 @@
 # 第8周 指针与字符串
 ## 1. 指针
 ### 1.1 取地址运算
+
 #### 运算符`sizeof`
 是一个运算符，能够给出某个类型或变量在内存中所占据的字节数
 1. `sizeof(int)`
 2. `sizeof(i)`
 
+<details><summary>🌰</summary>
+<p>
+  
 ```C
 #include<stdio.h>
 int main()
@@ -17,6 +21,9 @@ int main()
   return 0;
 }
 ```
+  
+</details>
+ 
 #### 运算符`&`
 `scanf("%d",&i);`里的`&`
 1. 用来获得变量的地址，操作数必须是变量
@@ -29,7 +36,9 @@ int i; printf("%x", &i);
 ```
 int i; printf("%p",&i);
 ```
-例子🌰
+<details><summary>🌰</summary>
+<p>
+
 ```C
 #include<stdio.h>
 int main(void)
@@ -46,6 +55,9 @@ int main(void)
 }
 // 32-bit & 64-bit 会有区别
 ```
+  
+</details>
+  
 3. `&`不能取的地址
 `&`不能对没有地址的东西取地址
 
@@ -55,6 +67,9 @@ int main(void)
 
 `&(++a)`->?
 
+  <details><summary>🌰</summary>
+<p>
+  
 ```C
 #include<stdio.h>
 
@@ -70,6 +85,8 @@ int main(void)
   return 0;
 }
 ```
+  </details>
+  
 ### 1.2 指针
 #### 指针
 ```
@@ -88,7 +105,9 @@ int *p,q;✅->`*p`为指针
 1. `void f(int*p)`;
 2. 在被调用的时候得到了某个变量的地址：`int i=0; f(&i)`，在函数里可以通过该指针访问外面的`i`;
 
-例子🌰
+  <details><summary>🌰</summary>
+<p>
+
 ```C
 #include<stdio.h>
 
@@ -108,6 +127,10 @@ void f(int *p)
   printf(" p=%p\n",p);
 }
 ```
+  
+  </details>
+  
+  
 #### 访问那个地址上的变量
 `*`是一个单目运算符，用来访问指针的值所表示的低智商的变量
 
@@ -116,7 +139,11 @@ void f(int *p)
 int k = *p;->
 *p = k+1;-> 
 ```
-例子🌰
+  
+<details>
+<summary>🌰</summary>
+<p>
+  
 ```C
 #include<stdio.h>
 
@@ -145,6 +172,9 @@ void g(int k)
   printf("k=%d\n",k);
 }
 ```
+  
+  </details>
+  
 ### 1.3 指针与数组
 #### 1.3.1 传入函数的数组成了什么？
 ```
@@ -165,7 +195,7 @@ int isPrime(int x, int knownPrimes[], int numberOfKnownPrimes)
 ```
 #### 1.3.2 Explore
 <details>
-<summary>点击这里打开/关闭隐藏内容😯</summary>
+<summary🌰</summary>
 <p>
   
 ```C
@@ -202,7 +232,12 @@ void minmax(int a[], int len, int *max, int *min)
   }
 }
 ```
-
+</details>
+  
+<details>
+<summary🌰🌰</summary>
+<p>
+  
 ```C
 #include<stdio.h>
 
@@ -241,7 +276,12 @@ void minmax(int a[], int len, int *max, int *min)
   }
 }
 ```
-
+</details>
+  
+<details>
+<summary🌰🌰</summary>
+<p>
+  
 ```C
 #include<stdio.h>
 
@@ -316,6 +356,9 @@ void minmax(int *a, int len, int *max, int *min)
   
     4.1 `int a[] <==> int * const a=`
   
+<details>
+<summary🌰🌰</summary>
+<p>  
 ```C
 #include<stdio.h>
 
@@ -358,3 +401,11 @@ void minmax(int *a, int len, int *max, int *min)
   }
 }
 ```
+</details>
+
+  
+## 2. 字符类型
+char是一种整数，也是一种特殊的类型：字符。
+  1. 用单引号表示的字符字面量：'a','1';
+  2. ''也是一个字符；
+  3. `Printf`和`Scanf`里用`%c`来输入输出字符
