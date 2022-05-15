@@ -359,6 +359,7 @@ void minmax(int *a, int len, int *max, int *min)
 <details>
 <summary🌰🌰</summary>
 <p>  
+  
 ```C
 #include<stdio.h>
 
@@ -405,7 +406,62 @@ void minmax(int *a, int len, int *max, int *min)
 
   
 ## 2. 字符类型
-char是一种整数，也是一种特殊的类型：字符。
+  ### 2.1 字符类型
+  char是一种整数，也是一种特殊的类型：字符。
   1. 用单引号表示的字符字面量：'a','1';
   2. ''也是一个字符；
   3. `Printf`和`Scanf`里用`%c`来输入输出字符
+
+<details>
+<summary🌰🌰</summary>
+<p>
+  
+  ```C
+  #include<stdio.h>
+  int main()
+  {
+    char c;
+    char d;
+    c = 1;
+    d = '1';
+    if( c == d )
+    {
+      printf("相等\n");
+    }
+    else
+    {
+      printf("不相等\n");
+    }
+    printf("c=%d\n",c);
+    printf("d=%d\n",d);
+  
+    return 0;
+  }
+  ```
+  
+</details> 
+  
+### 2.2 字符的输入输出
+如何输入‘1’这个字符给`char c`?
+1. `scnaf("%c",&c);`->1
+2. `scanf("%d",&i);c=i`->49
+
+<details>
+<summary🌰🌰</summary>
+  
+```C
+#include<stdio.h>
+int main()
+{
+  char c;
+  scnaf("%c",&c);
+  printf("c=%d\n",c);
+  printf("c='%c'\n",c);
+    
+  return 0;
+}
+```
+</details>
+  
+### 2.3 混合输入
+    
