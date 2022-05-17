@@ -487,7 +487,9 @@ int main()
   return 0;
 }
 ```
-</destails>
+  
+</details>
+  
   
 #### 2.3.2 字符计算
 ```
