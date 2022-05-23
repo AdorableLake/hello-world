@@ -513,3 +513,20 @@ int main()
 4. <string.h>里有很多处理字符串的函数；
 
 ### 3.2 字符串变量
+1. 
+```C
+char *str = "Hello";
+```
+2. 
+```C
+char word[] = "Hello";
+```
+3. 
+```C
+char line[10] = "Hello";
+```
+
+### 3.3 字符串常量 
+```
+char *s = "Hello World";
+```
