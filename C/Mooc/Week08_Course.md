@@ -7,8 +7,7 @@
 1. `sizeof(int)`
 2. `sizeof(i)`
 
-<details><summary>🌰</summary>
-<p>
+🌰
   
 ```C
 #include<stdio.h>
@@ -21,9 +20,7 @@ int main()
   return 0;
 }
 ```
-  
-</details>
- 
+
 #### 运算符`&`
 `scanf("%d",&i);`里的`&`
 1. 用来获得变量的地址，操作数必须是变量
@@ -36,8 +33,7 @@ int i; printf("%x", &i);
 ```
 int i; printf("%p",&i);
 ```
-<details><summary>🌰</summary>
-<p>
+🌰
 
 ```C
 #include<stdio.h>
@@ -56,8 +52,6 @@ int main(void)
 // 32-bit & 64-bit 会有区别
 ```
   
-</details>
-  
 3. `&`不能取的地址
 `&`不能对没有地址的东西取地址
 
@@ -67,8 +61,7 @@ int main(void)
 
 `&(++a)`->?
 
-  <details><summary>🌰</summary>
-<p>
+🌰
   
 ```C
 #include<stdio.h>
@@ -85,8 +78,9 @@ int main(void)
   return 0;
 }
 ```
-  </details>
-  
+
+[返回页首](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week08_Course.md#第8周-指针与字符串)
+
 ### 1.2 指针
 #### 指针
 ```
@@ -105,8 +99,7 @@ int *p,q;✅->`*p`为指针
 1. `void f(int*p)`;
 2. 在被调用的时候得到了某个变量的地址：`int i=0; f(&i)`，在函数里可以通过该指针访问外面的`i`;
 
-  <details><summary>🌰</summary>
-<p>
+🌰
 
 ```C
 #include<stdio.h>
@@ -128,8 +121,6 @@ void f(int *p)
 }
 ```
   
-  </details>
-  
   
 #### 访问那个地址上的变量
 `*`是一个单目运算符，用来访问指针的值所表示的低智商的变量
@@ -139,10 +130,8 @@ void f(int *p)
 int k = *p;->
 *p = k+1;-> 
 ```
-  
-<details>
-<summary>🌰</summary>
-<p>
+
+🌰
   
 ```C
 #include<stdio.h>
@@ -172,12 +161,12 @@ void g(int k)
   printf("k=%d\n",k);
 }
 ```
-  
-  </details>
-  
+
+[返回页首](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week08_Course.md#第8周-指针与字符串)
+
 ### 1.3 指针与数组
 #### 1.3.1 传入函数的数组成了什么？
-```
+```C
 int isPrime(int x, int knownPrimes[], int numberOfKnownPrimes)
 {
   int ret = 1;
@@ -194,9 +183,8 @@ int isPrime(int x, int knownPrimes[], int numberOfKnownPrimes)
 }
 ```
 #### 1.3.2 Explore
-<details>
-<summary🌰</summary>
-<p>
+
+🌰
   
 ```C
 #include<stdio.h>
@@ -232,12 +220,11 @@ void minmax(int a[], int len, int *max, int *min)
   }
 }
 ```
-</details>
-  
-<details>
-<summary🌰🌰</summary>
-<p>
-  
+
+[返回页首](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week08_Course.md#第8周-指针与字符串)
+
+🌰
+
 ```C
 #include<stdio.h>
 
@@ -276,11 +263,10 @@ void minmax(int a[], int len, int *max, int *min)
   }
 }
 ```
-</details>
-  
-<details>
-<summary🌰🌰</summary>
-<p>
+
+[返回页首](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week08_Course.md#第8周-指针与字符串)
+
+🌰
   
 ```C
 #include<stdio.h>
@@ -319,8 +305,9 @@ void minmax(int *a, int len, int *max, int *min)
   }
 }
 ```
-</details>
-  
+
+[返回页首](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week08_Course.md#第8周-指针与字符串)
+
 #### 1.3.3 小结
 1. 因此函数参数表中的数组其实是指针；
                                    
@@ -356,9 +343,7 @@ void minmax(int *a, int len, int *max, int *min)
   
     4.1 `int a[] <==> int * const a=`
   
-<details>
-<summary🌰🌰</summary>
-<p>  
+🌰
   
 ```C
 #include<stdio.h>
@@ -402,8 +387,8 @@ void minmax(int *a, int len, int *max, int *min)
   }
 }
 ```
-</details>
 
+[返回页首](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week08_Course.md#第8周-指针与字符串)
   
 ## 2. 字符类型
   ### 2.1 字符类型
@@ -412,9 +397,7 @@ void minmax(int *a, int len, int *max, int *min)
   2. ''也是一个字符；
   3. `Printf`和`Scanf`里用`%c`来输入输出字符
 
-<details>
-<summary🌰🌰</summary>
-<p>
+🌰
   
   ```C
   #include<stdio.h>
@@ -439,15 +422,13 @@ void minmax(int *a, int len, int *max, int *min)
   }
   ```
   
-</details> 
   
 ### 2.2 字符的输入输出
 如何输入‘1’这个字符给`char c`?
 1. `scnaf("%c",&c);`->1
 2. `scanf("%d",&i);c=i`->49
 
-<details>
-<summary🌰🌰</summary>
+🌰
   
 ```C
 #include<stdio.h>
@@ -461,7 +442,8 @@ int main()
   return 0;
 }
 ```
-</details>
+
+[返回页首](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week08_Course.md#第8周-指针与字符串)
   
 ### 2.3 混合输入
 #### 2.3.1 有何区别？
@@ -471,9 +453,6 @@ int main()
 ```
   
 🌰
-  
-<details>
-<summary🌰🌰</summary>
   
 ```C
 #include<stdio.h>
@@ -488,8 +467,7 @@ int main()
 }
 ```
   
-</details>
-  
+[返回页首](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week08_Course.md#第8周-指针与字符串)  
   
 #### 2.3.2 字符计算
 ```
@@ -498,8 +476,7 @@ int main()
   printf("%c\n",c);
 ```
   
-<details>
-<summary🌰🌰</summary>
+🌰
   
 ```C
 #include<stdio.h>
@@ -517,7 +494,6 @@ int main()
   int i = 'Z' - 'A'
   printf("%d\n",i);
 ```
-</details>
   
 ### 2.4 逃逸字符
 #### 2.4.1 逃逸字符
@@ -527,4 +503,13 @@ int main()
   "如输入\"5 7\"表示5英尺7英寸：");
 ```
 
+[返回页首](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week08_Course.md#第8周-指针与字符串)
+
 ## 3. 字符串
+### 3.1 定义
+1. 以整数0结尾的一串字符  ->  0 <==> '\0', 0!='0';
+2. 0标志字符串的结束，但它不是字符串的一部分  ->  计算字符串长度的时候不包含这个 0；
+3. 字符串以数组的形式存在，以数组或指针的形式访问  ->  更多地是以指针的形式；
+4. <string.h>里有很多处理字符串的函数；
+
+### 3.2 字符串变量
