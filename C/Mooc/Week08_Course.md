@@ -530,3 +530,69 @@ char line[10] = "Hello";
 ```
 char *s = "Hello World";
 ```
+<img width="1312" alt="截屏2022-06-08 18 55 33" src="https://user-images.githubusercontent.com/50417000/172599685-fc2b801c-c428-4570-a0b9-2b12a3c3d1e8.png">
+
+#### 3.3.1
+
+<img width="1312" alt="截屏2022-06-08 18 57 31" src="https://user-images.githubusercontent.com/50417000/172600025-d8e000e1-ebfa-4ab3-b01e-715462c838b4.png">
+
+## 4. 字符串计算
+<img width="1312" alt="截屏2022-06-08 19 03 01" src="https://user-images.githubusercontent.com/50417000/172601042-63337185-1b56-4302-9874-96c1af2a6010.png">
+
+### 4.1 常见错误
+<img width="1312" alt="截屏2022-06-08 19 07 17" src="https://user-images.githubusercontent.com/50417000/172601835-fb957d0d-f27a-42b0-aae9-501684644f7e.png">
+
+### 4.2 空字符串
+<img width="1312" alt="截屏2022-06-08 19 09 54" src="https://user-images.githubusercontent.com/50417000/172602300-3ad41c4f-0ff1-4ef8-a0ab-c98a3a3d3a08.png">
+
+### 4.3 string.h
+1. strlen: `size_t strlen(const char *s); //const 保证 strlen 不会修改字符串`
+```C
+#include<stdio.h>
+#include<string.h>
+
+int main(int argc, char const *argv[])
+{
+    char line[] = "Hello";
+    printf("strlen=%lu\n",strlen(line));
+    printf("sizeof=%lu\n",sizeof(line));
+  
+    return 0;
+}
+```
+2. strcmp: `int strcmp(const char *s1,const char *s2);`
+
+```C
+#include<stdio.h>
+#include<string.h>
+
+int main(int argc, char const *argv[])
+{
+    char s1[] = "abc";
+    char s2[] = "abc";
+    printf("%d\n",strcmp(s1,s2));
+  
+    return 0;
+}
+```
+3. strcpy: `char *strcpy(char *restrict dst, const char *restrict src);`
+把src的字符串拷贝到dst，并返回dst
+
+4. strcat: `char *strcat(char *restrict s1, const char *restrict s2);`
+把s2拷贝到s1的后面，接成一个长的字符串，再返回s1，其中s1必须具有足够的空间
+
+⚠️上述代码不够安全！(容易越界)
+
+安全版本👇
+```
+char * strncpy(char *restrict dst, const char *restrict src,size_t n);
+char * strncat(char *restrict s1, const char *restrict s2,size_t n);
+int strncmp(const char *s1, const char *s2,size_t n);
+```
+
+5. 
+`char *strchr(const char *s, int c)`->从左到右查找c在字符串中第一次出现的位置，返回的是指针；
+
+`char *strrchr(const char *s, int c)`->从右到左查找c在字符串中第一次出现的位置，返回的是指针；
+
+返回`NUll`表示没有找到；
