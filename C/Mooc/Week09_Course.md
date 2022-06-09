@@ -515,3 +515,260 @@ int main(void)
 1. 申请了忘记free -> 长时间运行内存逐渐下降；
 2. free过了再次free -> 崩溃
 3. 地址变过了，free了原地址
+
+[返回标题行](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week09_Course.md#week09-指针与字符串)
+
+## 9.3 字符串操作
+### 9.3.1 单字符输入输出
+1. putchar
+```
+int putchar(int c);
+向标准输出写一个字符；
+返回写了几个字符，EOF(-1)表示写失败；
+```
+2. getchar
+```
+int getchar(void);
+从标准输入读入一个字符；
+返回类型是int，是为了返回EOF(-1);
+windows: control z;
+unix: control d
+```
+```C
+#include<stdio.h>
+
+int main(int argc, char const *argv[])
+{
+    int ch;
+    
+    while( (ch = getchar())!=EOF )
+    {
+        putchar(ch);
+    }
+    
+    printf("EOF\n");
+    
+    return 0;
+}
+```
+
+### 9.3.2 字符串数组
+#### 1. 字符串数组
+```
+char **a; // a 是一个指针，指向另一个指针，另一个指针指向一个字符串
+
+char a[][];
+```
+#### 2. 程序参数
+```
+int main() <==> int main(int argc, char const *argv[])
+argv[0]是命令本身，当使用Unix的符号链接时，反映符号链接的名字；
+```
+
+```C
+#include<stdio.h>
+
+int main(int argc, char const *argv[])
+{
+    int i;
+    for(i=0;i<argc;i++)
+    {
+        printf("%d: %s\n",i,argv[i]);
+    }
+    return 0;
+}
+```
+
+## 9.4 字符串函数的实现
+### 9.4.1 strlen
+1. `strlen: size_t strlen(const char *s); `//const 保证 strlen 不会修改字符串
+```C
+#include<stdio.h>
+#include<string.h>
+
+size_t mylen(const char *s)
+{
+    int idx=0;
+    while(s[idx] != '0')
+    {
+        idx++;
+    }
+    return cnt;
+}
+```
+### 9.4.2 strcmp
+1. `strcmp: int strcmp(const char *s1,const char *s2);`
+```C
+#include<stdio.h>
+#include<string.h>
+
+int mycmp(const char* s1, const char *s2)
+{
+    while(*s1 == *s2 && *s1 != '\0')
+    {
+        s1++;
+        s2++;
+    }
+    return *s1-*s2;
+}
+
+int main(int argc, char const *argv[])
+{
+    char s1[] = "abc";
+    char s2[] = "abc";
+    printf("%d\n",strcmp(s1,s2));
+  
+    return 0;
+}
+
+/*
+    int idx=0;
+    while(s1[idx] == s2[idx] && s1[idx] != '\0')
+    {
+        /*
+        if(s1[idx] != s2[idx])
+        {
+            break;
+        }
+        else if(s1[idx] == '\0')
+        {
+            break;
+        }
+        */
+        idx++;
+    }
+*/    
+```
+
+### 9.4.3 strcpy
+
+`
+strcpy: char *strcpy(char *restrict dst, const char *restrict src); 
+把src的字符串拷贝到dst，并返回dst；
+stc是原，dst是目的；
+char *dst = (char*)malloc(strlen(src)+1); -> +1 不要忘记
+strcpy(dst, scr);
+`
+```C
+#include<stdio.h>
+#include<string.h>
+
+char* mycpy(char* dst, const char* src)
+{
+    /*数组版本
+    int idx = 0;
+    while(src[idx])
+    {
+        dst[idx] = src[idx];
+        idx++;
+    }
+    dst[idx]='\0';
+    return dst;
+    */
+    
+    char* ret=dst;
+    while(*dst++ = *src++);
+    *dst='\0';
+    return ret;
+    
+}
+
+int main(int argc, char const *argv[])
+{
+    char s1[] = "abc";
+    char s2[] = "abc";
+    strcpy(s1,s2);
+  
+    return 0;
+}
+```
+### 9.4.4 字符串中找字符
+```
+char *strchr(const char *s, int c) -> 从左到右查找c在字符串中第一次出现的位置，返回的是指针；
+char *strrchr(const char *s, int c)->从右到左查找c在字符串中第一次出现的位置，返回的是指针；
+返回NUll表示没有找到；
+```
+如何寻找第二个？
+```C
+#include<stdio.h>
+#include<string.h>
+
+int main(int argc, char const *argv[])
+{
+    char s[] = "hello";
+    
+    char *p=strchr(s,'l');
+    p=strchr(p+1,'l')
+    
+    printf("%s\n",p);
+  
+    return 0;
+}
+```
+将第一个字符串复制到另一个字符串
+```C
+#include<stdio.h>
+#include<string.h>
+
+int main(int argc, char const *argv[])
+{
+    char s[] = "hello";
+    
+    char *p=strchr(s,'l');
+    char *q=(char*)malloc(strlen(p)+1);
+    strcpy(q,p);
+
+    printf("%s\n",q);
+    free(q);
+  
+    return 0;
+}
+```
+找l前面的字符串
+```C
+#include<stdio.h>
+#include<string.h>
+
+int main(int argc, char const *argv[])
+{
+    char s[] = "hello";
+    
+    char *p = strchr(s,'l');
+    char c = *p;
+    *p = '\0';
+    char *q = (char*)malloc(strlen(s)+1);
+    strcpy(q,s);
+
+    printf("%s\n",q);
+    free(q);
+  
+    return 0;
+}
+```
+字符串中找字符串
+```
+char * strstr(const char *s1, const char *s2);
+char * strcasestr(const char *s1, const char *s2); -> 忽略大小写寻找
+```
+
+补充：strcat
+```C
+#include<stdio.h>
+#include<string.h>
+
+char * mystrcat(char* s1,char* s2)
+{
+    char * str = s1 + strlen(s1);
+    strcpy(str,s2);
+    return s1;
+}
+
+int main(int argc, char const *argv[])
+{
+    char s1[] = "abc";
+    char s2[] = "abc";
+    printf("%d\n",strcat(s1,s2));
+  
+    return 0;
+}
+```
