@@ -296,3 +296,22 @@ b = a+1;    //ERROR!
 ```
 int sum(const int a[],int length);
 ```
+
+[返回标题行](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week09_Course.md#week09-指针与字符串)
+
+## 9.2 指针运算
+### 9.2.1 
+#### 1. 
+```C
+#include<stdio.h>
+
+int main()
+{
+    char ac[] = {0,1,2,3,4,5,6,7,8,9,}
+    char *p = ac;
+    printf("p = %p\n",p);
+    printf("p+1 = %p\n",p+1);
+    
+    return 0;
+}
+```
