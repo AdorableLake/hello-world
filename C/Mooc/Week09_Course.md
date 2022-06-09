@@ -356,7 +356,162 @@ r+1-r=4;->sizeof(float)=4;
 递增递减 -> ++/--
 ```
 #### 3. `*p++`
-1. 取出p所指的那个数据，结束后再把p移动到下一个位置去;
-2. `++` 的优先级 > `*`的优先级;
-3. 常用于数组类的连续空间操作
-o+1-o=8;->sizeof(double);
+1. 取出p所指的那个数据，结束后再把p移动到下一个位置去；
+2. `++` 的优先级 > `*`的优先级；
+3. 常用于数组类的连续空间操作；
+4. 在某些CPU上，可直接被翻译为汇编指令；
+
+```C
+#include<stdio.h>
+
+int main(void)
+{
+    char ac[] = {0,1,2,3,4,5,6,7,8,9,};
+    char *p = ac;                   //<==> *p = &ac[n]; <==> *p = ac[n];
+    int i;
+    
+    for(i=0;i<sizeof(ac)/sizeof(ac[0]);i++)
+    {
+        printf("%d\n",ac[i]);
+    }
+    
+    while(*p != -1)
+    {
+        printf("%d\n",*p++);
+    }
+    return 0;
+}
+```
+详细解释在 [Week10](url) 中字符串部分详解
+
+#### 4. 指针比较
+1. `</<=/==/>/>=/!=`都可以用于指针运算中；
+2. 用于比较指针在内存中的地址大小；
+3. 数组单元的地址一定是线性递增的；
+
+#### 5. 0地址
+1. 内存中含有0地址，但0地址不要随便触碰；
+2. 编写的程序中的指针不应该具有0值； 
+3. 0地址的用处：
+```
+返回的指针是无效的；
+指针没有被真正初始化（先初始化为0）；
+```
+4. `NULL` 是一个预定定义的符号，表示0地址；（有的编译器不愿意用0表示0地址）
+
+#### 6. 指针的类型
+1. 无论指向什么类型，所有的指针的大小都是一样的，因为都是地址；
+2. 但是指向不同类型的指针的是不能直接互相赋值的；
+```
+为了避免用错指针
+```
+
+#### 7. 指针的类型转换
+1. void* 表示不知道指向何物的指针
+```
+计算时与 char* 相同但不相通
+```
+2. 指针也可以转换类型
+```
+int *p = &i;
+void *q = (void*)p;
+//这并没有改变p所指的变量的类型，而是让程序员不再当p是int型，而是void型
+```
+
+#### 8. 用指针来做什么
+1. 需要传入较大的数据使用参数；
+2. 传入数组后对数组做操作；
+3. 函数返回不止一个结果；
+4. 需要用函数来修改不止一个变量；
+5. 动态申请内存；
+
+[返回标题行](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week09_Course.md#week09-指针与字符串)
+
+### 9.2.2 动态内存分配
+#### 1. 输入数据
+```
+int *a = (int*)malloc(n*sizeof(int));
+```
+动态内存分配
+```C
+#include<stdio.h>
+#include<stdlib.h>
+
+int main()
+{
+    int number;
+    int* a;
+    int i;
+    printf("Enter the number:\n");
+    scanf("%d",&number);
+    //int a[number];                //C99之后的做法
+    a=(int*)malloc(number*sizeof(int));
+    
+    for(i=0; i<number; i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    
+    for(i=number-1;i>=0;i--)
+    {
+        printf("%d ",a[i]);
+    }
+    free(a);
+    return 0;
+}
+```
+
+#### 2. malloc
+```
+#include<stdlib.h>
+void*malloc(size_t size);
+```
+1. 向malloc申请的空间的大小是以字节为单位的；
+2. 返回的结果是 `void*` ，需要转换为自己需要的类型；
+```
+(int*)malloc(n*sizeof(int))
+```
+
+#### 3. 没空间了？
+```C
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(void)
+{
+    void *p;
+    int cnt = 0;
+    while( (p=malloc(100*1024*1024)) )           //每次申请100M的空间
+    {
+        cnt++;
+    }
+    printf("Allocate the memory space: %d00MB\n",cnt);
+    
+    return 0;
+}
+```
+
+#### 4. free()
+1. 申请来的空间还给系统
+
+```C
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(void)
+{
+    int i;
+    void *p = 0;
+    int cnt = 0;
+    //p=malloc(100*1024*1024);
+    //p++;
+    free(p);
+    
+    return 0;
+}
+```
+
+#### 5. 常见问题
+1. 申请了忘记free -> 长时间运行内存逐渐下降；
+2. free过了再次free -> 崩溃
+3. 地址变过了，free了原地址
