@@ -305,13 +305,58 @@ int sum(const int a[],int length);
 ```C
 #include<stdio.h>
 
-int main()
+int main(void)
 {
-    char ac[] = {0,1,2,3,4,5,6,7,8,9,}
-    char *p = ac;
+    char ac[] = {0,1,2,3,4,5,6,7,8,9,};
+    char *p = ac;                   //<==> *p = &ac[n]; <==> *p = ac[n];
     printf("p = %p\n",p);
-    printf("p+1 = %p\n",p+1);
+    printf("p+1 = %p\n",p+1);       //+1*sizeof(char)
+    
+    int ai[] = {0,1,2,3,4,5,6,7,8,9,};
+    int *q = ai;
+    printf("q = %p\n",q);
+    printf("q+1 = %p\n",q+1);       //+1*sizeof(int)
+    
+    double ad[] = {0,1,2,3,4,5,6,7,8,9,}; 
+    double *o = ad;
+    printf("o = %p\n",o);
+    printf("o+1 = %p\n",o+1);       //+1*sizeof(double)
+    
+    float af[] = {0,1,2,3,4,5,6,7,8,9,}; 
+    float *r = af;
+    printf("r = %p\n",r);
+    printf("r+1 = %p\n",r+1);       //+1*sizeof(float)
     
     return 0;
 }
 ```
+输出结果
+```
+p = 0x7fff3ec24b56
+p+1 = 0x7fff3ec24b57
+p+1-p=1;->sizeof(char)=1;
+
+q = 0x7fff3ec24b20
+q+1 = 0x7fff3ec24b24
+q+1-q=4;->sizeof(int)=4;
+
+o = 0x7fff3ec24ad0
+o+1 = 0x7fff3ec24ad8
+o+1-o=8;->sizeof(double)=8;
+
+r = 0x7fff3ec24aa0
+r+1 = 0x7fff3ec24aa4
+r+1-r=4;->sizeof(float)=4;
+```
+
+#### 2. 指针可以进行的运算
+算术运算
+```
+给指针加减一个整数 -> +/+=/-/-=
+递增递减 -> ++/--
+```
+#### 3. `*p++`
+1. 取出p所指的那个数据，结束后再把p移动到下一个位置去;
+2. `++` 的优先级 > `*`的优先级;
+3. 常用于数组类的连续空间操作
+o+1-o=8;->sizeof(double);
