@@ -94,4 +94,31 @@ int main(int argc, char const *argv[])
 
 枚举只是int，不会出现warning/error；
 
+[返回标题行](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week11_Course.md#week-11-结构类型)
+
 ## 11.2 结构
+### 11.2.1 
+#### 1. 声明结构类型
+```C
+#include<stdio.h>
+struct date
+{
+    int month;
+    int day;
+    int year;
+};                  //;不能漏掉
+
+int main(int argc, char const *argv[])
+{
+
+    
+    struct date today;
+    
+    today.month = 06;
+    today.day = 12;
+    today.year = 2022;
+    
+    printf("Today's date is %i-%i-%i.\n",today.year,today.month,today.day);
+    return 0;
+}
+```
