@@ -460,3 +460,85 @@ struct time timeUpdate(struct time now)
     }
 }
 ```
+#### 2. 嵌套的结构
+```
+struct point
+{
+    int x;
+    int y;
+};
+
+struct rectangle
+{
+    struct point pt1;
+    struct point pt2;
+};
+
+/*
+若有变量 
+
+struct rectangle r;
+
+就可以有
+
+r.pt1.x,r.pt1.y;
+r.pt2.x,r.pt2.y;
+
+若有变量定义
+
+struct rectangle r,*rp;
+rp=&r;
+
+下面四种形式是等价的
+
+r.pt1.x;
+rp->pt1.x;
+(r.pt1).x;
+(rp->pt1).x;
+
+但是不存在 rp->pt1->x，因为 pt1 不是指针
+*/
+```
+
+#### 3. 结构中的结构的数组
+```C
+#include<stdio.h>
+
+struct point
+{
+    int x;
+    int y;
+};
+
+struct rectangle
+{
+    struct point p1;
+    struct point p2;
+};
+
+void printRect(struct rectangle r)
+{
+    printf("<%d,%d> to <%d,%d>\n", r.p1.x, r.p1.y, r.p2.x, r.p2.y);
+}
+
+int main(int argc, const char *argv[])
+{
+    int i;
+    struct rectangle rects[] = 
+    {
+        {{1,2},{3,4}},
+        {{5,6},{7,8}}
+    };                  //2 rectangles
+    
+    for(i=0;i<2;i++)
+    {
+        printRect(rects[i]);
+    }
+    
+    return 0;
+}
+```
+
+[返回标题行](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week11_Course.md#week-11-结构类型)
+
+### 11.2.3 联合
