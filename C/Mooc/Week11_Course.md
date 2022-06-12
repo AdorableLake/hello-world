@@ -122,3 +122,73 @@ int main(int argc, char const *argv[])
     return 0;
 }
 ```
+#### 2. 声明结构的形式
+```C
+//标准形式
+struct point
+{
+    int x;
+    int y;
+};
+struct point p1,p2;
+
+//无名结构
+struct
+{
+    int x;
+    int y;
+}p1,p2;
+
+//名为p1、p2的 point 结构体
+struct point
+{
+    int x;
+    int y;
+}p1,p2;
+```
+
+#### 3. 结构的初始化
+```C
+#include<stdio.h>
+struct date
+{
+    int month;
+    int day;
+    int year;
+};                  //;不能漏掉
+
+int main(int argc, char const *argv[])
+{
+
+    
+    struct date today = {06,12,2022};
+    struct date thismonth = {.month=6,.year=2022};
+    
+    today.month = 06;
+    today.day = 12;
+    today.year = 2022;
+    
+    printf("Today's date is %i-%i-%i.\n",today.year,today.month,today.day);
+    printf("This month is %i-%i.\n",thismonth.year,thismonth.month);
+    return 0;
+}
+```
+#### 4. 结构成员
+结构和数组类似：数组用 `[]` 运算符和下标访问其成员；结构用 `.` 运算符和名字访问其成员；
+```C
+a[0]=10;
+
+today.day;
+student.firstName;
+p1.x;
+p2.y;
+```
+#### 5. 结构运算
+1. 要访问整个结构，直接用结构变量的名字；
+2. 对于整个结构，可以做赋值、取地址，也可以传递给函数参数；
+```
+p1=(struct point){5,10}; <==> p1.x=5;p1.y=10;
+p1=p2; <==> p1.x=p2.x;p1.y=p2.y;
+
+//⚠️注意：数组无法执行以上两种运算！
+```
