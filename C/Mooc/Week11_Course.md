@@ -110,8 +110,6 @@ struct date
 
 int main(int argc, char const *argv[])
 {
-
-    
     struct date today;
     
     today.month = 06;
@@ -191,4 +189,274 @@ p1=(struct point){5,10}; <==> p1.x=5;p1.y=10;
 p1=p2; <==> p1.x=p2.x;p1.y=p2.y;
 
 //⚠️注意：数组无法执行以上两种运算！
+```
+
+```C
+#include<stdio.h>
+struct date
+{
+    int month;
+    int day;
+    int year;
+};                  //;不能漏掉
+
+int main(int argc, char const *argv[])
+{
+    struct date today;
+    
+    today = (struct date){06,12,2022};
+    
+    struct date day;
+    
+    day = today;
+    
+    printf("Today's date is %i-%i-%i.\n",today.year,today.month,today.day);
+    printf("The day's date is %i-%i-%i.\n",day.year,day.month,day.day);
+    return 0;
+}
+```
+
+#### 6. 结构指针
+和数组不同，结构变量的名字并不是结构变量的地址，必须使用 `&` 运算符
+```
+struct date *pDate = &today;
+```
+
+[返回标题行](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week11_Course.md#week-11-结构类型)
+
+### 11.2.2 结构与函数
+#### 1. 结构作为函数参数
+```C
+int NumberOfDays(struct date d)
+```
+1. 整个结构可以作为参数的值传入函数；
+2. 此时在函数内新建一个结构变量，并复制调用者的结构的值；
+3. 也可以返回一个结构；
+4. 与数组完全不同；
+```C
+#include<stdio.h>
+#include<stdbool.h>
+
+struct date
+{
+    int month;
+    int day;
+    int year;
+};                  
+
+bool isLeap(struct date d)          //判断是否为闰年
+{
+    bool leap = false;
+    if( (d.year %4 == 0 && d.year %100 != 0 || d.year %400 ==0) )
+        leap = true;
+    return leap;
+}
+
+int NumberOfDays(struct date d)     //判断月份
+{
+    int days;
+    const int daysPerMonth[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
+    if(d.month == 2 && isLeap(d))
+        days = 29;
+    else
+        days = daysPerMonth[d.month-1];
+        
+    return days;            //Single-output
+}
+
+int main(int argc, char const *argv[])
+{
+    struct date today,tomorrow;
+    
+    printf("Enter today's date(mm dd yyyy):\n");
+    scanf("%i %i %i",&today.month,&today.day,&today.year);
+    
+    if(today.day != NumberOfDays(today))    //非该月最后天
+    {
+        tomorrow.day = today.day+1;         //天数加一
+        tomorrow.month = today.month;       //月不变
+        tomorrow.year = today.year;         //年不变
+    }
+    else if(today.month == 12)              //12月最后一天
+    {
+        tomorrow.day = 1;
+        tomorrow.month = 1;
+        tomorrow.year = today.year+1;
+    }
+    else
+    {
+        tomorrow.day = 1;
+        tomorrow.month = today.month+1;
+        tomorrow.year = today.year;
+    }
+    
+    printf("Tomorrow's date is %i-%i-%i.\n",
+        tomorrow.year,tomorrow.month,tomorrow.day);
+    
+    return 0;
+}
+```
+#### 2. 输入结构
+1. 没有直接的方式可以一次scanf一个结构;
+2. 如果我们打算写一个函数来读入结构；
+```C
+#include<stdio.h>
+
+struct point
+{
+    int x;
+    int y;
+};
+
+void getStruct(struct point p)
+{
+    scanf("%d",&p.x);
+    scanf("%d",&p.y);
+    printf("%d, %d",p.x,p.y);
+}
+
+void output(struct point p)
+{
+    printf("%d, %d",p.x,p.y);
+}
+
+int main()
+{
+    struct point y = {0,0};
+    getStruct(y);
+    output(y);
+    
+    return 0;
+}
+```
+修正后：
+```C
+#include<stdio.h>
+
+struct point
+{
+    int x;
+    int y;
+};
+
+struct point getStruct(void)
+{
+    struct point p;
+    scanf("%d",&p.x);
+    scanf("%d",&p.y);
+    printf("%d, %d",p.x,p.y);
+    return p;
+}
+
+void output(struct point p)
+{
+    printf("%d, %d",p.x,p.y);
+}
+
+int main()
+{
+    struct point y = {0,0};
+    y= getStruct();
+    output(y);
+    
+    return 0;
+}
+```
+#### 3. 结构指针作为参数
+
+#### 4. 指向结构的指针
+```C
+struct date
+{
+    int month;
+    int day;
+    int year;
+}myday;
+
+struct date *p = &myday;
+
+(*p).month = 12;    // <==> p->month = 12;
+```
+用 `->` 运算符表示指针所指的结构变量的成员
+```C
+#include<stdio.h>
+
+struct point
+{
+    int x;
+    int y;
+};
+
+struct point* getStruct(struct point* p)
+{
+    scanf("%d",&p->x);
+    scanf("%d",&p->y);
+    printf("%d, %d",p->x,p->y);
+    return p;
+}
+
+void output(struct point p)     //结构本身
+{
+    printf("%d, %d",p.x,p.y);
+}
+
+void print(const struct point* p)   
+{
+    printf("%d, %d",p->x,p->y);
+}
+
+int main(int argc, char const *argv[])
+{
+    struct point y = {0,0};
+    getStruct(&y);
+    output(y);
+    output(*getStruct(&y));
+    print(getStruct(&y));
+    
+    getStruct(&y)->x = 0;
+    *getStruct(&y) = (struct point){1,2};
+    
+    return 0;
+}
+```
+
+[返回标题行](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week11_Course.md#week-11-结构类型)
+
+### 11.2.3 结构中的结构
+#### 1. 结构数组
+```
+struct date dates[100];
+struct date dates[] = {{4,5,2005},{2,4,2005}};
+```
+
+```C
+#include<stdio.h>
+
+struct time
+{
+    int hour;
+    int minute;
+    int second;
+};
+
+struct time timeUpdate(struct time now)
+{
+    ++now.second;
+    if(now.second == 60)
+    {
+        now.second = 0;
+        ++now.minutes;
+        
+        if(now.minute == 60)
+        {
+            now.minute = 0;
+            ++now.hour;
+            
+            if(now.hour == 24)
+            {
+                now.hour = 0;
+            }
+        }
+    }
+}
 ```
