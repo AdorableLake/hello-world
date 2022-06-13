@@ -175,7 +175,7 @@ int main(int argc, const char *argv[])
 
 [返回标题行](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week12_Course.md#week-12-链表)
 
-### 12.2.2 链表的函数
+### 2. 链表的函数
 ```C
 #include "LNode.h"
 #include<stdio.h>
@@ -223,9 +223,309 @@ int main(int argc, const char *argv[])
             head = add(&L, number);
         }
     } while(number != -1);
+    // 搜索链表（遍历）
+    LNode *p;
+    for(p=list.head; p; p->next) {
+        printf("%d\t", p->value);
+    }
+    printf("\n");
     
     return 0;   
 }
 ```
 
 [返回标题行](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week12_Course.md#week-12-链表)
+
+### 3. 链表的搜索
+```C
+void print(List *pList)
+{
+    // 搜索链表（遍历）
+    LNode *p;
+    for(p=list.head; p; p = p->next) {  
+    // p = p->next非常经典的语句
+        printf("%d\t", p->value);
+    }
+    printf("\n");
+}
+```
+```C
+#include "LNode.h"
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct LNode {
+    int value;
+    struct LNode *next;
+} LNode;
+
+typedef struct List {
+    LNode* head;
+    //LNode* tail;
+} List;
+
+void add(List * pList, int number)
+{
+    // add to linkedlist
+    LNode *p = (int *)malloc(sizeof(LNode));
+    p->value = number;
+    p->next = NULL;
+            
+    // find the last
+    LNode *last = head;
+    if(last) {
+        while(last->next) {
+            last = last->next;
+        }
+        // attach
+        last->next = p;
+    } else {
+        pList->head = p;
+    }
+}
+
+void print(List *pList)
+{
+    // 搜索链表（遍历）
+    LNode *p;
+    for(p=list.head; p; p = p->next) {  
+    // p = p->next非常经典的语句
+        printf("%d\t", p->value);
+    }
+    printf("\n");
+}
+
+int main(int argc, const char *argv[])
+{
+    List L;
+    int number;
+    L.head = NULL;
+    do {
+        scanf("%d", &number);
+        if(number != -1) {
+            head = add(&L, number);
+        }
+    } while(number != -1);
+    
+    print(&L)
+    
+    scanf("%d", &number);
+    LNode *p;
+    int siFound = 0;
+    for(p = L.head; p; p = p->next) {
+        if(p->value == number) {
+            printf("Found.\n");
+            isFound = 1;
+            break;
+        }
+    }
+    if(!isFound) {
+        printf("Not found\n");
+    }
+    
+    return 0;   
+}
+```
+
+### 4. 链表的搜索
+```C
+void delete()
+{
+    LNode *q;
+    for(q=NULL,p=L.head;p;q=p,p=p->next) {
+        if(p->value == number) {
+            if(q) {
+                // Boundary condition: q == NULL
+                q->next = p->next;
+                free(p);
+                break;
+            }
+        }
+    } 
+}
+```
+
+```C
+#include "LNode.h"
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct LNode {
+    int value;
+    struct LNode *next;
+} LNode;
+
+typedef struct List {
+    LNode* head;
+    //LNode* tail;
+} List;
+
+void add(List * pList, int number)
+{
+    // add to linkedlist
+    LNode *p = (int *)malloc(sizeof(LNode));
+    p->value = number;
+    p->next = NULL;
+            
+    // find the last
+    LNode *last = head;
+    if(last) {
+        while(last->next) {
+            last = last->next;
+        }
+        // attach
+        last->next = p;
+    } else {
+        pList->head = p;
+    }
+}
+
+void print(List *pList)
+{
+    // 搜索链表（遍历）
+    LNode *p;
+    for(p=list.head; p; p = p->next) {  
+    // p = p->next非常经典的语句
+        printf("%d\t", p->value);
+    }
+    printf("\n");
+}
+
+int main(int argc, const char *argv[])
+{
+    List L;
+    int number;
+    L.head = NULL;
+    do {
+        scanf("%d", &number);
+        if(number != -1) {
+            head = add(&L, number);
+        }
+    } while(number != -1);
+    
+    print(&L)
+    
+    scanf("%d", &number);
+    LNode *p;
+    int siFound = 0;
+    for(p = L.head; p; p = p->next) {
+        if(p->value == number) {
+            printf("Found.\n");
+            isFound = 1;
+            break;
+        }
+    }
+    if(!isFound) {
+        printf("Not found\n");
+    }
+    LNode *q;
+    for(q=NULL,p=L.head;p;q=p,p=p->next) {
+        if(p->value == number) {
+            if(q) {
+                // Boundary condition: q == NULL
+                q->next = p->next;
+                free(p);
+                break;
+            }
+        }
+    }
+    
+    return 0;   
+}
+```
+
+### 5. 链表的清除
+
+```C
+#include "LNode.h"
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct LNode {
+    int value;
+    struct LNode *next;
+} LNode;
+
+typedef struct List {
+    LNode* head;
+    //LNode* tail;
+} List;
+
+void add(List * pList, int number)
+{
+    // add to linkedlist
+    LNode *p = (int *)malloc(sizeof(LNode));
+    p->value = number;
+    p->next = NULL;
+            
+    // find the last
+    LNode *last = head;
+    if(last) {
+        while(last->next) {
+            last = last->next;
+        }
+        // attach
+        last->next = p;
+    } else {
+        pList->head = p;
+    }
+}
+
+void print(List *pList)
+{
+    // 搜索链表（遍历）
+    LNode *p;
+    for(p=list.head; p; p = p->next) {  
+    // p = p->next非常经典的语句
+        printf("%d\t", p->value);
+    }
+    printf("\n");
+}
+
+int main(int argc, const char *argv[])
+{
+    List L;
+    int number;
+    L.head = NULL;
+    do {
+        scanf("%d", &number);
+        if(number != -1) {
+            head = add(&L, number);
+        }
+    } while(number != -1);
+    
+    print(&L)
+    
+    scanf("%d", &number);
+    LNode *p;
+    int siFound = 0;
+    for(p = L.head; p; p = p->next) {
+        if(p->value == number) {
+            printf("Found.\n");
+            isFound = 1;
+            break;
+        }
+    }
+    if(!isFound) {
+        printf("Not found\n");
+    }
+    LNode *q;
+    for(q=NULL,p=L.head;p;q=p,p=p->next) {
+        if(p->value == number) {
+            if(q) {
+                // Boundary condition: q == NULL
+                q->next = p->next;
+                free(p);
+                break;
+            }
+        }
+    }
+    for( p = head; p; p=q )
+    {
+        q = p->next;
+        free(q);
+    }
+    
+    return 0;   
+}
+```
