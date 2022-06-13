@@ -1,7 +1,6 @@
 # Week 12 链表
 ## 12.1 可变数组
-### 12.1.1 
-#### 1. 可变数组/Resizeable Array
+### 1. 可变数组/Resizeable Array
 1. 可增长性/Growable；
 2. 可知性/Get the current size；
 3. 可访问性/Access to the elements；
@@ -28,7 +27,7 @@ void array_inflate(Array *a, int more_size);    //让数组增长
 //<array.c>
 #include "array.h"
 #include<stdio.h>
-#include<string.h>
+#include<stdlib.h>
 
 const BLOCK_SIZE = 20;
 
@@ -111,3 +110,122 @@ int main()
     return 0;
 }
 ```
+### 2. 可变数组的缺陷
+1. 需要时间去拷贝；
+2. 以及可能被内存进程拒绝；
+
+[返回标题行](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week12_Course.md#week-12-链表)
+
+## 12.2 链表
+### 1. 链表
+```C
+//<LNode.h>
+
+#ifndef _NODE_H_
+#define _NODE_H_
+
+typedef struct LNode 
+{
+    int value;
+    struct LNode *next;
+} LNode;
+
+#endif
+
+//<LNode.c>
+#include "LNode.h"
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct LNode 
+{
+    int value;
+    struct LNode *next;
+} LNode;
+
+int main(int argc, const char *argv[])
+{
+    LNode * head = NULL;
+    int number;
+    do {
+        scanf("%d", &number);
+        if(number != -1) {
+            // add to linkedlist
+            LNode *p = (int *)malloc(sizeof(LNode));
+            p->value = number;
+            p->next = NULL;
+            
+            // find the last
+            LNode *last = head;
+            if(last) {
+                while(last->next) {
+                    last = last->next;
+                }
+                // attach
+                last->next = p;
+            } else {
+                head = p;
+            }
+        }   
+    } while(number != -1)
+    
+    return 0;
+}
+```
+
+[返回标题行](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week12_Course.md#week-12-链表)
+
+### 12.2.2 链表的函数
+```C
+#include "LNode.h"
+#include<stdio.h>
+#include<stdlib.h>
+/*
+typedef struct LNode {
+    int value;
+    struct LNode *next;
+} LNode;
+*/
+
+typedef struct List {
+    LNode* head;
+    //LNode* tail;
+} List;
+
+void add(List * pList, int number)
+{
+    // add to linkedlist
+    LNode *p = (int *)malloc(sizeof(LNode));
+    p->value = number;
+    p->next = NULL;
+            
+    // find the last
+    LNode *last = head;
+    if(last) {
+        while(last->next) {
+            last = last->next;
+        }
+        // attach
+        last->next = p;
+    } else {
+        pList->head = p;
+    }
+}
+
+int main(int argc, const char *argv[])
+{
+    List L;
+    int number;
+    L.head = NULL;
+    do {
+        scanf("%d", &number);
+        if(number != -1) {
+            head = add(&L, number);
+        }
+    } while(number != -1);
+    
+    return 0;   
+}
+```
+
+[返回标题行](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week12_Course.md#week-12-链表)
