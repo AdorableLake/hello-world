@@ -26,3 +26,10 @@ int f(void)
   return gAll;
 }
 ```
+
+[返回标题行](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week13_Course.md#week-13-程序结构)
+
+### 2. 全局变量的初始化
+1. 没有做初始化的全局变量会得到 `0` 值，而指针全局变量会得到 `NULL`；
+2. 只能用编译时刻已知的值来初始化全局变量；
+3. 他们的初始化发生在 `main` 函数之前；
