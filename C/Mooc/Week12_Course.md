@@ -36,6 +36,33 @@ typedef struct {
     int size;
 } Arrary;
 
+Array array_create(int init_size);              //创建/初始化
+void array_free(Array *a);                      //释放
+int array_size(const Array *a);                 //知道现有多少单元
+int* array_at(Array *a, int index);             //访问
+void array_inflate(Array *a, int more_size);    //让数组增长
+
+int main()
+{
+    Arrary a arrary_create(100);
+    printf("%d\n",array_size(&a));
+    *array_at(&a,0) = 10;
+    printf("%d\n", *array_at(&,0));
+    int number;
+    int cnt = 0;
+    while(1){
+        scanf("%d",&number);
+        if(number != -1)
+        {
+            *array_at(&a,cnt++);
+        }
+        //scanf("%d",array_at(&a,cnt++));
+    }
+    array_free(&a);
+    
+    return 0;
+}
+
 Array array_create(int init_size)              //创建/初始化
 {
     Array.a;
@@ -87,27 +114,6 @@ void array_inflate(Array *a, int more_size)    //让数组增长
     free(a->array);
     a->array = p;
     a->size += more_size;
-}
-
-int main()
-{
-    Arrary a arrary_create(100);
-    printf("%d\n",array_size(&a));
-    *array_at(&a,0) = 10;
-    printf("%d\n", *array_at(&,0));
-    int number;
-    int cnt = 0;
-    while(1){
-        scanf("%d",&number);
-        if(number != -1)
-        {
-            *array_at(&a,cnt++);
-        }
-        //scanf("%d",array_at(&a,cnt++));
-    }
-    array_free(&a);
-    
-    return 0;
 }
 ```
 ### 2. 可变数组的缺陷
@@ -192,25 +198,7 @@ typedef struct List {
     //LNode* tail;
 } List;
 
-void add(List * pList, int number)
-{
-    // add to linkedlist
-    LNode *p = (int *)malloc(sizeof(LNode));
-    p->value = number;
-    p->next = NULL;
-            
-    // find the last
-    LNode *last = head;
-    if(last) {
-        while(last->next) {
-            last = last->next;
-        }
-        // attach
-        last->next = p;
-    } else {
-        pList->head = p;
-    }
-}
+void add(List * pList, int number);
 
 int main(int argc, const char *argv[])
 {
@@ -231,6 +219,26 @@ int main(int argc, const char *argv[])
     printf("\n");
     
     return 0;   
+}
+
+void add(List * pList, int number)
+{
+    // add to linkedlist
+    LNode *p = (int *)malloc(sizeof(LNode));
+    p->value = number;
+    p->next = NULL;
+            
+    // find the last
+    LNode *last = head;
+    if(last) {
+        while(last->next) {
+            last = last->next;
+        }
+        // attach
+        last->next = p;
+    } else {
+        pList->head = p;
+    }
 }
 ```
 
@@ -264,36 +272,8 @@ typedef struct List {
     //LNode* tail;
 } List;
 
-void add(List * pList, int number)
-{
-    // add to linkedlist
-    LNode *p = (int *)malloc(sizeof(LNode));
-    p->value = number;
-    p->next = NULL;
-            
-    // find the last
-    LNode *last = head;
-    if(last) {
-        while(last->next) {
-            last = last->next;
-        }
-        // attach
-        last->next = p;
-    } else {
-        pList->head = p;
-    }
-}
-
-void print(List *pList)
-{
-    // 搜索链表（遍历）
-    LNode *p;
-    for(p=list.head; p; p = p->next) {  
-    // p = p->next非常经典的语句
-        printf("%d\t", p->value);
-    }
-    printf("\n");
-}
+void add(List * pList, int number);
+void print(List *pList);
 
 int main(int argc, const char *argv[])
 {
@@ -325,6 +305,38 @@ int main(int argc, const char *argv[])
     
     return 0;   
 }
+
+void add(List * pList, int number)
+{
+    // add to linkedlist
+    LNode *p = (int *)malloc(sizeof(LNode));
+    p->value = number;
+    p->next = NULL;
+            
+    // find the last
+    LNode *last = head;
+    if(last) {
+        while(last->next) {
+            last = last->next;
+        }
+        // attach
+        last->next = p;
+    } else {
+        pList->head = p;
+    }
+}
+
+void print(List *pList)
+{
+    // 搜索链表（遍历）
+    LNode *p;
+    for(p=list.head; p; p = p->next) {  
+    // p = p->next非常经典的语句
+        printf("%d\t", p->value);
+    }
+    printf("\n");
+}
+
 ```
 
 ### 4. 链表的搜索
@@ -360,36 +372,8 @@ typedef struct List {
     //LNode* tail;
 } List;
 
-void add(List * pList, int number)
-{
-    // add to linkedlist
-    LNode *p = (int *)malloc(sizeof(LNode));
-    p->value = number;
-    p->next = NULL;
-            
-    // find the last
-    LNode *last = head;
-    if(last) {
-        while(last->next) {
-            last = last->next;
-        }
-        // attach
-        last->next = p;
-    } else {
-        pList->head = p;
-    }
-}
-
-void print(List *pList)
-{
-    // 搜索链表（遍历）
-    LNode *p;
-    for(p=list.head; p; p = p->next) {  
-    // p = p->next非常经典的语句
-        printf("%d\t", p->value);
-    }
-    printf("\n");
-}
+void add(List * pList, int number);
+void print(List *pList);
 
 int main(int argc, const char *argv[])
 {
@@ -432,24 +416,6 @@ int main(int argc, const char *argv[])
     
     return 0;   
 }
-```
-
-### 5. 链表的清除
-
-```C
-#include "LNode.h"
-#include<stdio.h>
-#include<stdlib.h>
-
-typedef struct LNode {
-    int value;
-    struct LNode *next;
-} LNode;
-
-typedef struct List {
-    LNode* head;
-    //LNode* tail;
-} List;
 
 void add(List * pList, int number)
 {
@@ -481,6 +447,27 @@ void print(List *pList)
     }
     printf("\n");
 }
+```
+
+### 5. 链表的清除
+
+```C
+#include "LNode.h"
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct LNode {
+    int value;
+    struct LNode *next;
+} LNode;
+
+typedef struct List {
+    LNode* head;
+    //LNode* tail;
+} List;
+
+void add(List * pList, int number);
+void print(List *pList);
 
 int main(int argc, const char *argv[])
 {
@@ -527,5 +514,36 @@ int main(int argc, const char *argv[])
     }
     
     return 0;   
+}
+
+void add(List * pList, int number)
+{
+    // add to linkedlist
+    LNode *p = (int *)malloc(sizeof(LNode));
+    p->value = number;
+    p->next = NULL;
+            
+    // find the last
+    LNode *last = head;
+    if(last) {
+        while(last->next) {
+            last = last->next;
+        }
+        // attach
+        last->next = p;
+    } else {
+        pList->head = p;
+    }
+}
+
+void print(List *pList)
+{
+    // 搜索链表（遍历）
+    LNode *p;
+    for(p=list.head; p; p = p->next) {  
+    // p = p->next非常经典的语句
+        printf("%d\t", p->value);
+    }
+    printf("\n");
 }
 ```
