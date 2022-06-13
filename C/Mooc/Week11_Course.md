@@ -542,3 +542,69 @@ int main(int argc, const char *argv[])
 [返回标题行](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week11_Course.md#week-11-结构类型)
 
 ### 11.2.3 联合
+#### 1. 自定义数据类型（typedef）
+1. C语言提供了一个 `typedef` 的功能来声明一个已有的数据类型的新名字，比如：
+```
+typedef int Length;
+```
+使得 `Length` 成为 `int` 类型的别名；
+
+2. 这样 `Length` 这个名字就可以代替 `int` 出现在变量定义和参数声明的地方：
+```
+Length a, b, len;
+Length numbers[10];
+```
+#### 2. typedef
+声明了新的类型的名字：
+1. 新的名字是某种类型的别名；
+2. 改善了程序的可读性；
+```
+typedef long int64_t;
+
+typedef struct Adate{
+    int month;
+    int day;
+    int year;
+}Date;
+
+//用Date命名struct Adate{}
+```
+
+[返回标题行](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week11_Course.md#week-11-结构类型)
+
+### 11.3.2 联合
+#### 1. 联合
+```
+union AnElt{
+    int i;
+    char c;
+}elt1,elt2;
+
+elt.i = 4;
+elt2.c = 'a';
+elt2.i = 0xDEADBEEF;
+```
+sizeof(union...) = 
+sizeof(每个成员)的最大值
+
+```C
+#include<stdio.h>
+
+typedef union {
+    int i;
+    char ch[sizeof(int)];
+}CHI;
+
+int main(int argc, const char * argv[])
+{
+    CHI chi;
+    int i;
+    chi.i = 1234;
+    for(i=0;i<sizeof(int);i++) {
+        printf("%02hhX",chi.ch[i]); //修饰符在文件章节进行扩展
+    }
+    printf("\n");
+    
+    return 0;
+}
+```
