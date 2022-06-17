@@ -179,7 +179,7 @@ extern int i; ->  声明变量
 
 3. 标准头文件格式
 ```C
-#ifNdef __LIST_HEAD_
+#ifndef __LIST_HEAD_
 #define __LIST_HEAD_
 
 #include "node.h"
