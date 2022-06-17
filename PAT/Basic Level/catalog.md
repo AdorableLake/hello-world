@@ -3,12 +3,12 @@
 声明：本文为本人 PAT-Basic Level 的做题记录
 
 # 目录
-### [1001](url)
+### [1001](https://github.com/AdorableLake/hello-world/blob/master/PAT/Basic%20Level/15-Scores/1001.md)
 ### [1002](url)
 ### [1003](url)
 ### [1004](url)
 ### [1005](url)
-### [1006](url)
+### [1006](https://github.com/AdorableLake/hello-world/blob/master/PAT/Basic%20Level/15-Scores/1006.md)
 ### [1007](url)
 ### [1008](url)
 ### [1009](url)
