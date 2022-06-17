@@ -166,3 +166,28 @@ __STDC__
 2. 需要时在.c文件中使用 `#include` 来调用；
 3. `" "` 与 `< >`：前者更灵活，后者只会在制定目录库中寻找；
 ### 3. 外部声明
+```C
+int i;        ->  定义变量 
+extern int i; ->  声明变量
+```
+1. 声明与定义：
+
+定义会产生代码；
+声明不产生代码；
+
+2. 声明：
+
+3. 标准头文件格式
+```C
+#ifNdef __LIST_HEAD_
+#define __LIST_HEAD_
+
+#include "node.h"
+
+typedef struct _list {
+  Node* head;
+  Node* tail;
+} List;
+
+#endif
+```
