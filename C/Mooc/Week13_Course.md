@@ -115,3 +115,54 @@ void g(void)
 3. 使用全局变量和静态本地变量的函数的线程不安全；
 
 [返回标题行](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week13_Course.md#week-13-程序结构)
+
+## 13.2 编译预处理
+### 13.2.1 宏定义
+#### 1. 编译预处理指令：#define/#include
+1. `#` 开头的是编译预处理指令；
+2. 不是C语言的成分，但C语言离不开；
+3. `#define` 用来定义一个宏。
+
+#### 2. #define
+
+#### 3. 没有值的宏
+
+#### 4. 与定义的宏
+```
+__LINE__
+__FILE__
+__DATE__
+__TIME__
+__STDC__
+```
+### 13.2.2 预定义的宏
+#### 1. 像函数的宏
+1. 
+```
+#define cube(x)((x)*(x)*(x))
+```
+2. 宏可以带参数；
+
+#### 2. 错误定义的宏
+```
+#define RADTODEG1(x)(x*57.29578)
+#define RADTODEG2(x)(x)*57.29578
+```
+正确定义👇
+```
+#define RADTODEG(x)((x)*57.29578)
+```
+#### 3. 带参数的宏
+1. 一切都要有括号：整个值和参数出现的地方；
+2. 有 `#` 和 `##` 两种形式；
+3. 部分可用 `inline` 语句替代;
+
+[返回标题行](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week13_Course.md#week-13-程序结构)
+
+## 13.3 大程序结构
+### 1. 多个.c文件
+### 2. 头文件
+1. 函数源代码存放位置，以.h结尾；
+2. 需要时在.c文件中使用 `#include` 来调用；
+3. `" "` 与 `< >`：前者更灵活，后者只会在制定目录库中寻找；
+### 3. 外部声明
