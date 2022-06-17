@@ -27,26 +27,38 @@ ababbba abbabbabbabbaacc
 
 #include<stdio.h>
 #include<string.h>
+#include<stdlib.h>
+#define N 10000
 
-char * strstr(const char *s1, const char *s2);
-
-int main(int argc,const char * argv[])
+int main(void)
 {
-    char s1,s2;
+    char src[N]={'\0'};             //定义源输出字符串数组
+    char dst[N]={'\0'};             //定义目标输出字符串数组
+    char c;                         //定义
     
-    scanf("%s\n",s1);
-    scanf("%s\n",s2);
-
-    if() {
-        printf("-1");
-    } else {
-        printf(" ");
+    while((c=getchar()) != '\n') {
+        int i=0;
+        src[i]=c;
+        i++;
+    }
+    
+    while((c=getchar()) != '\n') {
+        int j=0;
+        dst[j]=c;
+        j++;
+    }
+    
+    char *p=src, *q=dst;
+    
+    if( !strstr(q, p) ) {
+        printf("%d",-1);
+    }
+    while( strstr(q, p) ) {
+        q = strstr(q, p);
+        printf("%d ", q-dst);
+        q++;
     }
     return 0;
 }
 
-char * strstr(const char *s1, const char *s2)
-{
-    
-}
 
