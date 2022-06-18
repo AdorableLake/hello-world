@@ -25,6 +25,12 @@ ababbba abbabbabbabbaacc
 8 11 14 17
 */
 
+/*
+第一种思路：
+1. 定义源码、目标；
+2. 利用for循环来写入字节串；
+3. 
+*/
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
@@ -32,33 +38,60 @@ ababbba abbabbabbabbaacc
 
 int main(void)
 {
-    char src[N]={'\0'};             //定义源输出字符串数组
-    char dst[N]={'\0'};             //定义目标输出字符串数组
-    char c;                         //定义
+    char src[N]={'\0'};             
+    char dst[N]={'\0'};             
+    char c;                         
     
-    while((c=getchar()) != '\n') {
-        int i=0;
+    for(int i = 0; getchar() != '\n'; i++) {
+        c=getchar();
         src[i]=c;
-        i++;
     }
-    
-    while((c=getchar()) != '\n') {
-        int j=0;
+
+    for(int j = 0; getchar() != '\n'; j++) {    //用for循环语句更好，但仍然解决不了问题
+        c=getchar();
         dst[j]=c;
-        j++;
     }
-    
-    char *p=src, *q=dst;
+    printf("%s\n",src);
+    printf("%s\n",dst);
+
+    char *p=src, *q=dst;                        //定义指针数组用来
     
     if( !strstr(q, p) ) {
         printf("%d",-1);
     }
     while( strstr(q, p) ) {
         q = strstr(q, p);
-        printf("%d ", q-dst);
+        printf("%ld ", q-dst);
         q++;
     }
     return 0;
 }
 
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define N 10000
 
+int main()
+{
+    char src[N]={'\0'}, dst[N]={'\0'};
+    char c;
+    
+    gets(src);
+    gets(dst);
+    
+    char *p=strstr(dst,src);
+    if(p==NULL) {
+        printf("-1");
+    } else {
+        while(p!=NULL) {
+            printf("%d",p-dst);
+            if(p-dst==0) {
+                printf(" ");
+            }
+            p=strstr(++p,src);
+        }
+    }
+    
+    return 0;
+}
