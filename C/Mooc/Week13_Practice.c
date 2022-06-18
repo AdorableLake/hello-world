@@ -18,21 +18,23 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
+#define MAXN 10000
 
 int main()
 {
-    char ch;
+    int n;
     int i=0;
-    char src[]={'\0'};
+    int src[]={0,};
     
-    while( getchar() != '-1' ) {
-        ch = getchar();
-        src[i]=ch;
+    while( n != -1 ) {
+        scanf("%d ",&n);
+        src[i]=n;
         i++;
     }
     
-    char *p=src[];
-    
-    while( )
+    for(int j=i-1; j>=0; j--) {
+        printf("%d ",src[j]);
+    }
+   
     return 0;
 }
