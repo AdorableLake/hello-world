@@ -38,3 +38,133 @@ int main()
    
     return 0;
 }
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+typedef struct LNode {
+    int data;
+    struct LNode *next;    
+} LNode, *linklist;
+
+void tailInsert(LNode);
+void reverse(LNode L);
+void Print(LNode L);
+
+int main()
+{
+    LNode L,P;
+    tailInsert(L);
+    P=reverse(L);   
+    Print(P);
+
+    return 0;
+}
+
+void tailInsert(LNode &L)            //尾插法建立单链表
+{
+    int x;
+    L=(int*)malloc(sizeof(LNode));
+    LNode *s, *r=L;
+    scanf("%d",&x);
+    while(x!=-1) {                      //当输入为-1时，停止输入
+        s=(LNode*)malloc(sizeof(LNode));
+        s->data=x;
+        r->next=s;
+        r=s;
+        scanf("%d",&x);
+    }
+    r->next=NULL;
+    return L;
+}
+
+void reverse(LNode L)
+{
+    LNode P = L->next, P0 = L, P1 = P->next;
+    LNode Ph = L;
+    Ph->next = NULL;
+    while( P1 != NULL ) {
+        P->next = P0;
+        P0 = P;
+        P = P1;
+        P1 = P->next;
+    }
+    L = P0;
+    free(P);
+    return L;
+}
+
+void Print(LNode L)
+{
+    LNode P;
+    for( P = L; P != NULL; P = P->next) {
+        printf("%d ", P->data);
+    }
+}
+
+#include <stdio.h>
+#include <stdlib.h>
+ 
+
+typedef struct LNode {
+	int data;
+	struct LNode *next;
+} LNode, *List;
+ 
+List ReadInput();       /* 输入 */ 
+List Sort(List L);      /* 逆序 */ 
+void Print(List L);     /* 输出 */ 
+ 
+int main()
+{
+	List L,P;
+	L = ReadInput();
+	P = Sort(L);
+	Print(P);
+	return 0;		
+}
+ 
+List ReadInput()
+{
+	List P,Q,t;
+	P = (List)malloc(sizeof(LNode));
+	Q = P;
+	for(;;) {
+		scanf("%d", &Q->data);
+		t = Q;
+		Q = (List)malloc(sizeof(LNode));
+		t->next = Q;
+		if(t->data == -1)
+		{
+			t->next = NULL; 
+			free(Q);
+			break;
+		}
+	}
+	return P;
+ } 
+ 
+List Sort(List L)
+{
+	List P=L->next,P0=L,P1=P->next,t;  /* P0当前处理的上一个结点，P1当前处理的下一个结点 */ 
+	List Pt = L;
+	Pt->next = NULL;                    /* 头结点指向空 */ 
+	for(; P1!=NULL; )
+	{
+		P->next = P0;                   /* 指向前驱 */     
+		P0 = P;                         /* 将当前结点赋给上一个结点 */
+		P = P1;                         /* 将下一个结点赋给当前结点 */
+		P1 = P->next;                   /* P重新指向下一个结点P */ 
+	}
+	L = P0;   
+	free(P);
+	return L;
+}
+ 
+void Print(List L)
+{
+	List P;
+	for(P=L;P!=NULL;P=P->next)
+		printf("%d ",P->data);
+}
