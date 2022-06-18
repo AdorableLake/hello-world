@@ -28,7 +28,7 @@ ababbba abbabbabbabbaacc
 /*
 第一种思路：
 1. 定义源码、目标；
-2. 利用for循环来写入字节串；
+2. 利用for循环来写入字节串，但是会缺斤少两；
 3. 
 */
 #include<stdio.h>
@@ -58,15 +58,22 @@ int main(void)
     
     if( !strstr(q, p) ) {
         printf("%d",-1);
-    }
-    while( strstr(q, p) ) {
-        q = strstr(q, p);
-        printf("%ld ", q-dst);
-        q++;
+    } else {
+        while( strstr(q, p) ) {
+            q = strstr(q, p);
+            printf("%ld ", q-dst);
+            q++;
+        }
     }
     return 0;
 }
 
+/*
+解法2:
+1. 使用gets()从键盘获取字符串；
+2. 但是采用getchar()就会出现缺斤少两的错误；
+3. 很迷惑；
+*/
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -75,7 +82,6 @@ int main(void)
 int main()
 {
     char src[N]={'\0'}, dst[N]={'\0'};
-    char c;
     
     gets(src);
     gets(dst);
@@ -85,13 +91,12 @@ int main()
         printf("-1");
     } else {
         while(p!=NULL) {
-            printf("%d",p-dst);
-            if(p-dst==0) {
+            printf("%ld",p-dst);
+            if(p-dst!=0) {
                 printf(" ");
             }
             p=strstr(++p,src);
         }
     }
-    
     return 0;
 }
