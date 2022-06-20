@@ -15,6 +15,7 @@
 输出样例：
 4 3 2 1 
 */
+
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
