@@ -18,8 +18,7 @@ int main(int argc, char const *argv[])
     
     printf("Input your favorite color:\n");
     scanf("%d", &color);
-    switch(color)
-    {
+    switch(color) {
         case RED: colorname = "red"; break;
         case YELLOW: colorname = "yelow"; break;
         case GREEN: colorname = "green"; break;
@@ -75,12 +74,9 @@ int main(int argc, char const *argv[])
     
     printf("Input your favorite color:\n");
     scanf("%d", &color);
-    if(color >= 0 && color < NumCOLORS)
-    {
+    if(color >= 0 && color < NumCOLORS) {
         colorname = ColorNames[color];
-    }
-    else
-    {
+    } else {
         colorname = "unknown";
     }
   
@@ -135,14 +131,14 @@ struct
 {
     int x;
     int y;
-}p1,p2;
+} p1,p2;
 
 //名为p1、p2的 point 结构体
 struct point
 {
     int x;
     int y;
-}p1,p2;
+} p1,p2;
 ```
 
 #### 3. 结构的初始化
@@ -242,6 +238,36 @@ struct date
     int year;
 };                  
 
+bool isLeap(struct date d);          //判断是否为闰年
+int NumberOfDays(struct date d);     //判断月份
+
+int main(int argc, char const *argv[])
+{
+    struct date today,tomorrow;
+    
+    printf("Enter today's date(mm dd yyyy):\n");
+    scanf("%i %i %i",&today.month,&today.day,&today.year);
+    
+    if(today.day != NumberOfDays(today)) {      //非该月最后天
+        tomorrow.day = today.day+1;             //天数加一
+        tomorrow.month = today.month;           //月不变
+        tomorrow.year = today.year;             //年不变
+    } else if(today.month == 12) {              //12月最后一天
+        tomorrow.day = 1;
+        tomorrow.month = 1;
+        tomorrow.year = today.year+1;
+    } else {
+        tomorrow.day = 1;
+        tomorrow.month = today.month+1;
+        tomorrow.year = today.year;
+    }
+    
+    printf("Tomorrow's date is %i-%i-%i.\n",
+        tomorrow.year,tomorrow.month,tomorrow.day);
+    
+    return 0;
+}
+
 bool isLeap(struct date d)          //判断是否为闰年
 {
     bool leap = false;
@@ -261,38 +287,6 @@ int NumberOfDays(struct date d)     //判断月份
         
     return days;            //Single-output
 }
-
-int main(int argc, char const *argv[])
-{
-    struct date today,tomorrow;
-    
-    printf("Enter today's date(mm dd yyyy):\n");
-    scanf("%i %i %i",&today.month,&today.day,&today.year);
-    
-    if(today.day != NumberOfDays(today))    //非该月最后天
-    {
-        tomorrow.day = today.day+1;         //天数加一
-        tomorrow.month = today.month;       //月不变
-        tomorrow.year = today.year;         //年不变
-    }
-    else if(today.month == 12)              //12月最后一天
-    {
-        tomorrow.day = 1;
-        tomorrow.month = 1;
-        tomorrow.year = today.year+1;
-    }
-    else
-    {
-        tomorrow.day = 1;
-        tomorrow.month = today.month+1;
-        tomorrow.year = today.year;
-    }
-    
-    printf("Tomorrow's date is %i-%i-%i.\n",
-        tomorrow.year,tomorrow.month,tomorrow.day);
-    
-    return 0;
-}
 ```
 #### 2. 输入结构
 1. 没有直接的方式可以一次scanf一个结构;
@@ -306,6 +300,18 @@ struct point
     int y;
 };
 
+void getStruct(struct point p);
+void output(struct point p);
+
+int main()
+{
+    struct point y = {0,0};
+    getStruct(y);
+    output(y);
+    
+    return 0;
+}
+
 void getStruct(struct point p)
 {
     scanf("%d",&p.x);
@@ -316,15 +322,6 @@ void getStruct(struct point p)
 void output(struct point p)
 {
     printf("%d, %d",p.x,p.y);
-}
-
-int main()
-{
-    struct point y = {0,0};
-    getStruct(y);
-    output(y);
-    
-    return 0;
 }
 ```
 修正后：
@@ -385,6 +382,24 @@ struct point
     int y;
 };
 
+struct point* getStruct(struct point* p);
+void output(struct point p);     //结构本身
+void print(const struct point* p); 
+
+int main(int argc, char const *argv[])
+{
+    struct point y = {0,0};
+    getStruct(&y);
+    output(y);
+    output(*getStruct(&y));
+    print(getStruct(&y));
+    
+    getStruct(&y)->x = 0;
+    *getStruct(&y) = (struct point){1,2};
+    
+    return 0;
+}
+
 struct point* getStruct(struct point* p)
 {
     scanf("%d",&p->x);
@@ -402,20 +417,6 @@ void print(const struct point* p)
 {
     printf("%d, %d",p->x,p->y);
 }
-
-int main(int argc, char const *argv[])
-{
-    struct point y = {0,0};
-    getStruct(&y);
-    output(y);
-    output(*getStruct(&y));
-    print(getStruct(&y));
-    
-    getStruct(&y)->x = 0;
-    *getStruct(&y) = (struct point){1,2};
-    
-    return 0;
-}
 ```
 
 [返回标题行](https://github.com/AdorableLake/hello-world/blob/master/C/Mooc/Week11_Course.md#week-11-结构类型)
@@ -430,28 +431,43 @@ struct date dates[] = {{4,5,2005},{2,4,2005}};
 ```C
 #include<stdio.h>
 
-struct time
-{
+struct time {
     int hour;
     int minute;
     int second;
 };
 
+struct time timeUpdate(struct time now);
+
+int main(void)
+{
+    struct time testTimes[5] = {
+        {11,59,59}, {12,0,0}, {1,29,59}, {23,59,59}, {19,12,27}
+    };
+    for( int i = 0; i < 5; i++ ) {
+        printf("Time is %.2i:%.2i:%.2i",
+            testTimes[i].hour, testTimes[i].minute, testTimes[i].second);
+            
+        testTimes[i] = timeUpdate(testTimes[i]);
+        
+        printf("...one second later it's %.2i:%.2i:%.2i.\n",
+            testTimes[i].hour, testTimes[i].minute, testTimes[i].second);
+    }
+    return 0;
+}
+
 struct time timeUpdate(struct time now)
 {
     ++now.second;
-    if(now.second == 60)
-    {
+    if(now.second == 60) {
         now.second = 0;
         ++now.minutes;
         
-        if(now.minute == 60)
-        {
+        if(now.minute == 60) {
             now.minute = 0;
             ++now.hour;
             
-            if(now.hour == 24)
-            {
+            if(now.hour == 24) {
                 now.hour = 0;
             }
         }
@@ -459,7 +475,7 @@ struct time timeUpdate(struct time now)
 }
 ```
 #### 2. 嵌套的结构
-```
+```C
 struct point
 {
     int x;
@@ -514,26 +530,26 @@ struct rectangle
     struct point p2;
 };
 
-void printRect(struct rectangle r)
-{
-    printf("<%d,%d> to <%d,%d>\n", r.p1.x, r.p1.y, r.p2.x, r.p2.y);
-}
+void printRect(struct rectangle r);
 
 int main(int argc, const char *argv[])
 {
     int i;
-    struct rectangle rects[] = 
-    {
+    struct rectangle rects[] = {
         {{1,2},{3,4}},
         {{5,6},{7,8}}
     };                  //2 rectangles
     
-    for(i=0;i<2;i++)
-    {
+    for(i=0;i<2;i++) {
         printRect(rects[i]);
     }
     
     return 0;
+}
+
+void printRect(struct rectangle r)
+{
+    printf("<%d,%d> to <%d,%d>\n", r.p1.x, r.p1.y, r.p2.x, r.p2.y);
 }
 ```
 
