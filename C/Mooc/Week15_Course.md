@@ -31,7 +31,7 @@ scanf:
 
 ### 15.1.2 文件输入输出
 1. 打开文件的标准方式
-```
+```C
 //FILE
 FILE* fopen(const char * restrict path, const char * restrict mode);
 int fclose(FILE *stream);
