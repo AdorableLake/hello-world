@@ -8,9 +8,9 @@ scanf("%[flag]type");
 ```
 printf:
 
-| Flag  | Meaning | width/.prec | Meaning | hlL/类型修饰 | Meaning |
-| :---: | :---: | :---: | :---: | :---: | :---: |
-| - | 左对齐 | number | 最小字符数 | hh | 单个字节 ｜ h | short |
+| Flag  | Meaning | width/.prec | Meaning | hlL/类型修饰 | Meaning | hlL/类型修饰 | Meaning |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| - | 左对齐 | number | 最小字符数 | hh | 单个字节 | h | short |
 | + | 在前面放+或- | * | 下一个参数是字符数 | l | long |
 | (space) | 正数留空 | .number | 小数点后的位数 | ll | long long |
 | 0 | 0填充 | .* | 下一个参数是小数点后的位数 | L | long double |
@@ -26,3 +26,15 @@ scanf:
 | l | long, double | x | 十六进制 |
 | ll | long long | a,e,f,g | float | 
 | L | long double | c | char |
+
+`[^.]`
+
+### 15.1.2 文件输入输出
+1. 打开文件的标准方式
+```
+//FILE
+FILE* fopen(const char * restrict path, const char * restrict mode);
+int fclose(FILE *stream);
+fscanf(FILE*,...);
+fprintf(FILE*,...);
+```
