@@ -334,6 +334,18 @@ struct point
     int y;
 };
 
+struct point getStruct(void);
+void output(struct point p);
+
+int main()
+{
+    struct point y = {0,0};
+    y= getStruct();
+    output(y);
+    
+    return 0;
+}
+
 struct point getStruct(void)
 {
     struct point p;
@@ -346,15 +358,6 @@ struct point getStruct(void)
 void output(struct point p)
 {
     printf("%d, %d",p.x,p.y);
-}
-
-int main()
-{
-    struct point y = {0,0};
-    y= getStruct();
-    output(y);
-    
-    return 0;
 }
 ```
 #### 3. 结构指针作为参数
@@ -579,7 +582,7 @@ typedef struct Adate{
     int month;
     int day;
     int year;
-}Date;
+} Date;
 
 //用Date命名struct Adate{}
 ```
@@ -592,7 +595,7 @@ typedef struct Adate{
 union AnElt{
     int i;
     char c;
-}elt1,elt2;
+} elt1,elt2;
 
 elt.i = 4;
 elt2.c = 'a';
@@ -607,7 +610,7 @@ sizeof(每个成员)的最大值
 typedef union {
     int i;
     char ch[sizeof(int)];
-}CHI;
+} CHI;
 
 int main(int argc, const char * argv[])
 {
