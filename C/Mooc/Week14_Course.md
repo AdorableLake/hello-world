@@ -67,7 +67,7 @@ void h(int i);
 int main(void)
 {
     int i;
-    scnaf("%d", &i);
+    scanf("%d", &i);
     switch(i) {
         case 0: f(0); break;
         case 1: g(0); break;
@@ -103,11 +103,14 @@ void h(int i);
 int main(void)
 {
     int i;
-    scnaf("%d", &i);
+    scanf("%d", &i);
+    
+    //这里的代码不会随着函数的变化而需要改变
     (void)(*fa)(int) = {f,g,h};
     if( i>= 0 && i<sizeof(fa)/sizeof(fa[0]) ) {
         (*fa[i])(0);
     }
+    
     return 0;
 }
 
