@@ -157,8 +157,6 @@ struct date
 
 int main(int argc, char const *argv[])
 {
-
-    
     struct date today = {06,12,2022};
     struct date thismonth = {.month=6,.year=2022};
     
