@@ -1,3 +1,4 @@
+/*
 # 1. 最小包围矩形
 ## 题目内容：
 
@@ -25,8 +26,9 @@
 ## 解答：
 
 ```C
-#include<stdio.h>
+*/
 
+#include<stdio.h>
 
 typedef struct Window {
     int x;
@@ -57,8 +59,8 @@ int main()
     free(w);
     return 0;
 }
-```
-
+// ```
+/*
 # 2. 分数比较 
 ## 题目内容：
 
@@ -84,6 +86,7 @@ int main()
 ```
 ## 解答
 ```C
+*/
 #include<stdio.h>
 int main()
 {
@@ -95,4 +98,4 @@ int main()
     else if( a1*b2 - b1*a2 < 0 ) printf("%d/%d < %d/%d\n", a1, b1, a2, b2);
     return 0;
 }
-```
+// ```
